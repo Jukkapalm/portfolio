@@ -13,5 +13,30 @@
         <link rel="stylesheet" href="css/tyyli.css">
     </head>
     <body>
+
+        <div class="mobile-header d-lg-none bg-primary">Software Developer Trainee</div>
+
+        <div class="mobile-navigaatio d-lg-none d-flex justify-content-between align-items-center bg-warning">
+            <div>Jukka Palm</div>
+            <button class="btn custom-hamburger" type="button" data-bs-toggle="offcanvas" data-bs-target="#mobileMenu">
+                ☰
+            </button>
+        </div>
+
+        <div class="offcanvas offcanvas-start bg-dark" id="mobileMenu">
+            <div class="offcanvas-header">
+                <div class="offcanvas-title">Jukka Palm</div>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas"></button>
+            </div>
+            <div class="offcanvas-body">
+                <ul class="nav flex-column gap-2">
+                    <li class="nav-item"><a class="nav-link" href="#">Tietoa minusta</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Teknologiat</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Projektit</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Koulutus</a></li>
+                </ul>
+            </div>
+        </div>
+
     </body>
 </html>
