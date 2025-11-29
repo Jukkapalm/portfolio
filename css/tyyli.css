@@ -1,3 +1,29 @@
 body {
     margin: 0;
+    background-color: #12131a;
+}
+
+.mobile-header, .mobile-navigaatio {
+    background-color: #1b1f2b;
+}
+
+.mobile-navigaatio {
+    margin-top: 43px;
+    width: 100%;
+}
+
+h3, h5 {
+    font-family: 'Exo 2', sans-serif;
+    color: #ffffff;
+}
+
+.offcanvas {
+    margin-top: 44px;
+    background-color: #1b1f2b;
+}
+
+@media (min-width: 576px) {
+    .offcanvas {
+        margin-top: 47px;
+    }
 }
