@@ -12,17 +12,27 @@ body {
     width: 100%;
 }
 
-h1, h3, h4, h5 {
+h2, h3, h5 {
     font-family: 'Exo 2', sans-serif;
     color: #ffffff;
+}
+
+.navbar-brand {
+    color: #ffffff;
+    font-family: 'Exo 2', sans-serif;
+}
+
+.navbar-brand:hover,
+.titteli h2:hover {
+    color: #00ffd1;
+    text-shadow: 0 0 6px #00ffd1, 0 0 12px #00ffd1;
+    transition: all 0.3s ease;
 }
 
 h5:hover {
     transform: scale(1.1);
 }
 
-h1:hover,
-h4:hover,
 h5:hover {
     color: #00ffd1;
     text-shadow: 0 0 6px #00ffd1, 0 0 12px #00ffd1;
@@ -58,6 +68,18 @@ h5:hover {
 p {
     font-family: 'Roboto', sans-serif;
     color: #e0e0e0;
+}
+
+.banner-txt h2 {
+    text-align: center;
+}
+
+.banner-txt .banner-img {
+    background-color: #12131a;
+}
+
+#slouganKaruselli .carousel-inner {
+    min-height: 70px;
 }
 
 @media (min-width: 576px) {
