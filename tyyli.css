@@ -1,0 +1,31 @@
+body {
+    background-color: #0d0f12;
+}
+
+.mobile-header {
+    height: 40px;
+    background-color: #151a1f;
+    font-family: 'Chakra Petch', sans-serif;
+    color: #00f6ff;
+}
+
+.mobile-bar {
+    margin-top: 40px;
+    width: 100%;
+    background-color: #151a1f;
+    font-family: 'Chakra Petch', sans-serif;
+    color: #c5c8d0;
+}
+
+.custom-hamburger {
+    height: 40px;
+    color: #c5c8d0;
+    border: none;
+}
+
+.offcanvas {
+    margin-top: 40px;
+    background-color: #151a1f;
+    font-family: 'Chakra Petch', sans-serif;
+    color: #c5c8d0;
+}

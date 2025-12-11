@@ -14,6 +14,32 @@
         <link rel="stylesheet" href="tyyli.css">
     </head>
     <body>
-        
+        <!-- Mobiilin yläpalkki -->
+        <div class="mobile-header d-lg-none d-flex align-items-center justify-content-center fixed-top"><h3 class="m-0">Jukka Palm</h3></div>
+
+        <!-- Mobiili navbar-brand sekä hamburgermenu button -->
+        <div class="mobile-bar d-lg-none d-flex justify-content-between align-items-center position-fixed">
+            <h5 class="m-0 px-1">Sorftware Developer Trainee</h5>
+            <button class="btn custom-hamburger p-0" type="button" data-bs-toggle="offcanvas" data-bs-target="#mobileMenu">
+                <h5 class="m-0 px-2">☰</h5>
+            </button>
+        </div>
+
+        <!-- Offcanvas menu -->
+        <div class="offcanvas offcanvas-start d-lg-none" data-bs-backdrop="false" id="mobileMenu">
+            <div class="offcanvas-header p-1 d-flex justify-content-between align-items-center">
+                <div class="offcanvas-title"><h5 class="m-0">Software Developer Trainee</h5></div>
+                <button type="button" class="btn-close btn-close-white m-0" data-bs-dismiss="offcanvas"></button>
+            </div>
+            <div class="offcanvas-body">
+                <ul class="nav flex-column gap-2">
+                    <li class="nav-item"><a class="nav-link" href="#"><h6>Tietoa minusta</h6></a></li>
+                    <li class="nav-item"><a class="nav-link" href="#"><h6>Teknologiat</h6></a></li>
+                    <li class="nav-item"><a class="nav-link" href="#"><h6>Projektit</h6></a></li>
+                    <li class="nav-item"><a class="nav-link" href="#"><h6>Koulutus</h6></a></li>
+                </ul>
+            </div>
+        </div>
+
     </body>
 </html>
