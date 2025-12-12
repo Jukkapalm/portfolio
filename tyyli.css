@@ -6,7 +6,7 @@ body {
     height: 40px;
     background-color: #151a1f;
     font-family: 'Chakra Petch', sans-serif;
-    color: #00f6ff;
+    color: #c5c8d0;
 }
 
 .mobile-bar {
@@ -14,12 +14,12 @@ body {
     width: 100%;
     background-color: #151a1f;
     font-family: 'Chakra Petch', sans-serif;
-    color: #c5c8d0;
+    color: #00f6ff;
 }
 
 .custom-hamburger {
     height: 40px;
-    color: #c5c8d0;
+    color: #00f6ff;
     border: none;
 }
 
@@ -27,5 +27,54 @@ body {
     margin-top: 40px;
     background-color: #151a1f;
     font-family: 'Chakra Petch', sans-serif;
+    color: #00f6ff;
+}
+
+.offcanvas-body .nav-item a {
     color: #c5c8d0;
+}
+
+.offcanvas-body .nav-item a:focus {
+    color: #00f6ff;
+    transform: scale(1.05);
+}
+
+.btn-close.custom-close {
+    background-color: #00f6ff;
+    opacity: 1;
+}
+
+.sidebar {
+    background-color: #151a1f;
+    width: clamp(200px, 15vw, 400px);
+    border-right: 1px solid #00f6ff;
+}
+
+.navbar-brand {
+    color: #00f6ff;
+    font-family: 'Chakra Petch', sans-serif;
+}
+
+.navbar-brand:hover {
+    color: #00f6ff;
+    text-shadow: 0 0 6px #00f6ff, 0 0 12px #00f6ff, 0 0 24px #00f6ff;
+    transition: text-shadow 0.2s ease;
+}
+
+.titteli, .titteli:hover {
+    font-family: 'Chakra Petch', sans-serif;
+    color: #c5c8d0;
+    cursor: default;
+}
+
+.sidebar .nav-item a {
+    color: #c5c8d0;
+    font-family: 'Chakra Petch', sans-serif;
+}
+
+.sidebar .nav-item a:hover {
+    color: #00f6ff;
+    text-shadow: 0 0 6px #00f6ff;
+    border-bottom: 1px solid #00f6ff;
+    transition: all 0.2s ease;
 }
