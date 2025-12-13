@@ -14,12 +14,12 @@ body {
     width: 100%;
     background-color: #151a1f;
     font-family: 'Chakra Petch', sans-serif;
-    color: #00f6ff;
+    color: #fff700;
 }
 
 .custom-hamburger {
     height: 40px;
-    color: #00f6ff;
+    color: #fff700;
     border: none;
 }
 
@@ -27,54 +27,129 @@ body {
     margin-top: 40px;
     background-color: #151a1f;
     font-family: 'Chakra Petch', sans-serif;
-    color: #00f6ff;
+    color: #fff700;
+    z-index: 1046;
 }
 
 .offcanvas-body .nav-item a {
     color: #c5c8d0;
 }
 
-.offcanvas-body .nav-item a:focus {
-    color: #00f6ff;
-    transform: scale(1.05);
-}
-
 .btn-close.custom-close {
-    background-color: #00f6ff;
+    background-color: #fff700;
     opacity: 1;
 }
 
 .sidebar {
     background-color: #151a1f;
     width: clamp(200px, 15vw, 400px);
-    border-right: 1px solid #00f6ff;
+    border-right: 1px solid #fff700;
 }
 
 .navbar-brand {
-    color: #00f6ff;
+    color: #fff700;
     font-family: 'Chakra Petch', sans-serif;
 }
 
 .navbar-brand:hover {
-    color: #00f6ff;
-    text-shadow: 0 0 6px #00f6ff, 0 0 12px #00f6ff, 0 0 24px #00f6ff;
+    color: #fff700;
+    text-shadow: 0 0 6px #fff700, 0 0 12px #fff700, 0 0 24px #fff700;
     transition: text-shadow 0.2s ease;
 }
 
 .titteli, .titteli:hover {
     font-family: 'Chakra Petch', sans-serif;
-    color: #c5c8d0;
+    color: #e5e7eb;
     cursor: default;
 }
 
 .sidebar .nav-item a {
-    color: #c5c8d0;
+    color: #e5e7eb;
     font-family: 'Chakra Petch', sans-serif;
 }
 
 .sidebar .nav-item a:hover {
-    color: #00f6ff;
-    text-shadow: 0 0 6px #00f6ff;
-    border-bottom: 1px solid #00f6ff;
+    color: #fff700;
+    text-shadow: 0 0 6px #fff700;
+    border-bottom: 1px solid #fff700;
     transition: all 0.2s ease;
+}
+
+#tietoa-minusta {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.banner-txt h1 {
+    font-family: 'Chakra Petch', sans-serif;
+    color: #e5e7eb;
+    cursor: default;
+}
+
+.banner-txt h3, h6 {
+    font-family: 'Inter', sans-serif;
+    color: #e5e7eb;
+    cursor: default;
+}
+
+.banner-txt, .banner-img {
+    border-bottom: 1px solid #39ff14;
+}
+
+.banner-txt a {
+    color: #39ff14;
+    text-shadow: 0 0 6px #39ff14;
+    text-decoration: none;
+}
+
+.banner-txt a:hover {
+    color: #fff700;
+    transform: scale(1.05);
+    transition: all 0.2s ease;
+}
+
+#teknologiat {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+#teknologiat h2 {
+    margin-bottom: 3rem;
+    font-family: 'Chakra Petch', sans-serif;
+    color: #c5c8d0;
+}
+
+#teknologiat h3 {
+    font-family: 'Chakra Petch', sans-serif;
+    color: #c5c8d0;
+}
+
+.badge {
+    background-color: #151a1f;
+    color: #c5c8d0;
+    font-family: 'Inter', sans-serif;
+    padding: 0.5em;
+    border: 1px solid #39ff14;
+}
+
+.badge:hover {
+    transform: scale(1.05);
+    cursor: default;
+}
+
+@media (min-width: 992px) {
+    #tietoa-minusta,
+    #teknologiat {
+        margin-left: clamp(200px, 15vw, 400px);
+    }
+}
+
+@media (max-width: 992px) {
+    #tietoa-minusta {
+        padding-top: 80px;
+    }
 }
