@@ -141,9 +141,17 @@ body {
     cursor: default;
 }
 
+#projektit {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
 @media (min-width: 992px) {
     #tietoa-minusta,
-    #teknologiat {
+    #teknologiat,
+    #projektit {
         margin-left: clamp(200px, 15vw, 400px);
     }
 }
