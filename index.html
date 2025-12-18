@@ -13,7 +13,7 @@
         <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="tyyli.css">
     </head>
-    <body>
+    <body data-bs-spy="scroll" data-bs-target=".navbar" data-bs-offset="50">
         <!-- Mobiilin yläpalkki -->
         <div class="mobile-header d-lg-none d-flex align-items-center justify-content-center fixed-top"><h3 class="m-0">Software Developer Trainee</h3></div>
 
@@ -36,7 +36,7 @@
                     <li class="nav-item"><a class="nav-link" href="#tietoa-minusta"><h5>Tietoa minusta</h5></a></li>
                     <li class="nav-item"><a class="nav-link" href="#teknologiat"><h5>Teknologiat</h5></a></li>
                     <li class="nav-item"><a class="nav-link" href="#projektit"><h5>Projektit</h5></a></li>
-                    <li class="nav-item"><a class="nav-link" href="#"><h5>Koulutus</h5></a></li>
+                    <li class="nav-item"><a class="nav-link" href="#koulutus"><h5>Koulutus</h5></a></li>
                 </ul>
             </div>
         </div>
@@ -57,26 +57,29 @@
                         <a class="nav-link" href="#projektit"><h5>Projektit</h5></a>  
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#"><h5>Koulutus</h5></a>
+                        <a class="nav-link" href="#koulutus"><h5>Koulutus</h5></a>
                     </li>
                 </ul>
             </nav>
         </div>
 
+        <!-- Sisältö sectionit -->
         <section id="tietoa-minusta">
-            <div class="container">
-                <div class="row justify-content-center">
-                    <div class="banner-txt col-lg-5 d-flex flex-column justify-content-center align-items-start">
-                        <h1>Jukka Palm</h1>
-                        <h3>Kiinnostukseni kohteita ovat tietokannat, back-end</h3>
-                        <h6>Etsin harjoittelupaikkaa, jossa voin kasvaa kehittäjänä ja päästä osaksi oikeita projekteja.</h6>
-                        <h6>Minulla on suuri halu oppia jatkuvasti uutta ja vapaa-aikaa vietän koodaten sekä kehittäen omaa osaamistani.</h6>
-                        <br>
-                        <a class="py-3" href="#">Tutustu kaikkiin projekteihini</a>
-                    </div>
+            <div class="container d-flex justify-content-center align-items-center">
+                <div class="hero-banneri col-lg-10">
+                    <div class="row justify-content-center">
+                        <div class="banner-txt col-lg-6 d-flex flex-column justify-content-center align-items-start">
+                            <h1>Jukka Palm</h1>
+                            <h3>Kiinnostukseni kohteita ovat tietokannat, back-end</h3>
+                            <h6>Etsin harjoittelupaikkaa, jossa voin kasvaa kehittäjänä ja päästä osaksi oikeita projekteja.</h6>
+                            <h6>Minulla on suuri halu oppia jatkuvasti uutta ja vapaa-aikaa vietän koodaten sekä kehittäen omaa osaamistani.</h6>
+                            <br>
+                            <a class="btn btn-primary mx-auto mb-5" href="#">Tutustu kaikkiin projekteihini</a>
+                        </div>
 
-                    <div class="banner-img col-lg-5 d-flex justify-content-center">
-                        <img style="height: 400px;" src="images/aboutme-hero.png" alt="Kuva Jukka Palm">
+                        <div class="banner-img col-lg-4 d-flex justify-content-center">
+                            <img style="height: 400px;" src="images/aboutme-hero.png" alt="Kuva Jukka Palm">
+                        </div>
                     </div>
                 </div>
             </div>
@@ -110,10 +113,98 @@
         </section>
 
         <section id="projektit">
-            <div class="container d-flex justify-content-center">
-                <h2>Projektit</h2>
+            <div class="container">
+                <h2 class="text-center mb-5">Projektit</h2>
+                <div class="row">
+                    <div class="col-12 col-md-6 col-lg-4 mb-4">
+                        <div class="card projekti-kortti">
+                            <img src="" alt="Projektin kuva">
+                            <div class="card-body">
+                                <h5 class="card-title">Projektin nimi</h5>
+                                <p class="card-text">
+                                    Kuvaus projektista
+                                </p>
+                                <a href="#" class="btn btn-primary">Katso demo</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-12 col-md-6 col-lg-4 mb-4">
+                        <div class="card projekti-kortti">
+                            <img src="" alt="Projektin kuva">
+                            <div class="card-body">
+                                <h5 class="card-title">Projektin nimi</h5>
+                                <p class="card-text">
+                                    Kuvaus projektista
+                                </p>
+                                <a href="#" class="btn btn-primary">Katso demo</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-12 col-md-6 col-lg-4 mb-4">
+                        <div class="card projekti-kortti">
+                            <img src="" alt="Projektin kuva">
+                            <div class="card-body">
+                                <h5 class="card-title">Projektin nimi</h5>
+                                <p class="card-text">
+                                    Kuvaus projektista
+                                </p>
+                                <a href="#" class="btn btn-primary">Katso demo</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </section>
 
+        <section id="koulutus">
+            <div class="container d-flex justify-content-center align-items-center flex-column">
+                <div class="text-center">
+                    <h2>Koulutus</h2>
+                    <ul class="koulutus">
+                        <li>Tieto- ja viestintätekniikan perustutkinto, Ohjelmistokehittäjä (valmistuminen kevät 2027)</li>
+                        <li>Avoimen AMK:n kurssi: Python-ohjelmoinnin perusteet (käynnissä)</li>
+                    </ul>
+                </div>
+                <div class="col-lg-4 mt-5">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th colspan="2" class="text-center">Kielet</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Suomi</td>
+                                <td>Äidinkieli</td>
+                            </tr>
+                            <tr>
+                                <td>Englanti</td>
+                                <td>Hyvä</td>
+                            </tr>
+                            <tr>
+                                <td>Ruotsi</td>
+                                <td>Perusteet</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <footer class="footer py-3 text-center">
+            <div class="container d-flex justify-content-center align-items-center gap-3">
+                <a href="#" target="_blank" class="some-linkit">
+                    <i class="fa-brands fa-instagram"></i>
+                </a>
+                <a href="#" target="_blank" class="some-linkit">
+                    <i class="fa-brands fa-github"></i>
+                </a>
+            </div>
+            <div class="mt-2">
+                © 2025 Jukka Palm
+            </div>
+        </footer>
     </body>
 </html>
