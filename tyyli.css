@@ -256,9 +256,12 @@ body {
 }
 
 @media (max-width: 992px) {
-    #tietoa-minusta { padding-top: 45px; }
+    #tietoa-minusta { padding-top: 80px; }
 }
 
-@media (max-width: 768px) {
-    .hero-nimi { display: none; }
+@media (max-width: 767px) {
+    .hero-nimi {
+        display: none;
+        text-align: center;
+    }
 }
