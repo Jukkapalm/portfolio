@@ -248,6 +248,7 @@ body {
     transform: scale(1.1);
 }
 
+/* Desktop näkymässä marginia sisällön ja vasemman reunan välille sidebaria varten */
 @media (min-width: 992px) {
     #tietoa-minusta,
     #teknologiat,
@@ -256,6 +257,7 @@ body {
     .footer { margin-left: clamp(200px, 15vw, 400px); }
 }
 
+/* Lisää yläreunaan paddingiä mobiilissa ettei sectioni jää yläpalkkien alle */
 @media (max-width: 992px) {
     #tietoa-minusta { padding-top: 80px; }
 }

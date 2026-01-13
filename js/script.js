@@ -1,6 +1,9 @@
 gsap.registerPlugin(ScrollTrigger);
 
+// ScrollTrigger animaatio isommille näytöille kuin 767px, mobiilissa ei ole scroll animaatioita
 if (window.innerWidth > 767) {
+
+    // Bannerin animaatio scrollauksessa
     gsap.fromTo(".hero-banneri",
         { y: "100vh", opacity: 0, visibility: "visible" },
         { y: 0, opacity: 1, duration: 1.1, ease: "power4.out" }
@@ -15,6 +18,7 @@ if (window.innerWidth > 767) {
         delay: 0.5
     });
 
+    // Teknologiat osion animointi scrollauksessa
     gsap.from("#teknologiat h2", {
         y: 50,
         opacity: 0,
@@ -27,6 +31,7 @@ if (window.innerWidth > 767) {
         }
     });
 
+    // Teknologiat osion badget
     gsap.from("#teknologiat .badges span", {
         y: 20,
         opacity: 0,
@@ -40,6 +45,7 @@ if (window.innerWidth > 767) {
         }
     });
 
+    // Projektit osion animointi scrollauksessa
     gsap.from("#projektit h2", {
         y: 50,
         opacity: 0,
@@ -52,6 +58,7 @@ if (window.innerWidth > 767) {
         }
     });
 
+    // Projekti korttien animointi
     gsap.from("#projektit .projekti-kortti", {
         y: 40,
         opacity: 0,
@@ -65,6 +72,7 @@ if (window.innerWidth > 767) {
         }
     });
 
+    // Koulutus osion animointi scrollauksessa
     gsap.from("#koulutus h2", {
         y: 50,
         opacity: 0,
@@ -90,6 +98,7 @@ if (window.innerWidth > 767) {
         }
     });
 
+// Animoinnit asetettu näkyväksi isommilla kuin 767px, tässä ne on mobiilissa pois
 } else {
     const elementit = document.querySelectorAll(".hero-banneri, .banner-txt h1, .banner-txt h3, .banner-txt h6, .banner-txt a, #teknologiat h2, #teknologiat .badges span, #projektit h2, #projektit .projekti-kortti, #koulutus h2, #koulutus .koulutus li, #koulutus .table");
     elementit.forEach(el => {
