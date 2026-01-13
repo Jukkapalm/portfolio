@@ -7,7 +7,7 @@ if (window.innerWidth > 767) {
     );
 
     gsap.from(".banner-txt h1, .banner-txt h3, .banner-txt h6, .banner-txt a", {
-        y: 30,
+        y: 40,
         opacity: 0,
         duration: 0.6,
         stagger: 0.15,
