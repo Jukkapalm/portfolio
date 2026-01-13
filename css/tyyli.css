@@ -260,6 +260,7 @@ body {
     #tietoa-minusta { padding-top: 80px; }
 }
 
+/* Piilotetaan bannerista nimi mobiilissa */
 @media (max-width: 767px) {
     .hero-nimi {
         display: none;

@@ -99,6 +99,7 @@ if (window.innerWidth > 767) {
     });
 }
 
+// Offcanvas menu sulkeutuu kun linkkiä on painettu
 const offcanvasLinkit = document.querySelectorAll("#mobileMenu .nav-link");
 const offcanvasEl = document.getElementById("mobileMenu");
 const bsOffcanvas = bootstrap.Offcanvas.getOrCreateInstance(offcanvasEl);
