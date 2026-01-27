@@ -29,20 +29,23 @@ html, body {
 
 #system-check {
     color: #00F2FF;
-    font-size: 1.1rem;
+    font-size: 0.8rem;
     line-height: 1.6;
     text-shadow: 0 0 8px #00F2FF;
     border-left: 2px solid #00F2FF;
     padding-left: 15px;
 }
 
-@media screen and (max-width: 576px) and (orientation: portrait) {
+@media (min-width: 767px) {
     #system-check {
-        font-size: 0.8rem;
+        font-size: 1rem;
     }
-    /*.cyber-eye {
+}
+
+/*@media screen and (max-width: 576px) and (orientation: portrait) {
+    .cyber-eye {
         transform: translateX(32%);
-    }*/
+    }
 }
 
 /*@media screen and (min-width: 993px) and (max-width: 1369px) and (orientation: landscape) {
