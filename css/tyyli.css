@@ -1,0 +1,58 @@
+/* Sivun perustyylit */
+html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background-color: #000;
+    font-family: "Courier New", monospace;
+}
+
+#boot-screen {
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.cyber-eye {
+    height: 100vh;
+    width: auto;
+    right: 0;
+    top: 0;
+    opacity: 0;
+    animation: electrical-awakening 8s forwards;
+}
+
+@media screen and (max-width: 1024px) and (orientation: portrait) {
+    .cyber-eye {
+        transform: translateX(32%);
+    }
+}
+
+@media screen and (min-width: 993px) and (max-width: 1369px) and (orientation: landscape) {
+    .cyber-eye {
+        transform: translateX(15%);
+    }
+}
+
+@keyframes electrical-awakening {
+    0%   { opacity: 0; }
+    10%  { opacity: 0.2; }
+    11%  { opacity: 0; }
+    25%  { opacity: 0; }
+    26%  { opacity: 0.5; }
+    27%  { opacity: 0.1; }
+    29%  { opacity: 0.7; }
+    30%  { opacity: 0; }
+    50%  { opacity: 0.4; }
+    52%  { opacity: 0.9; }
+    54%  { opacity: 0.3; }
+    70%  { opacity: 0.9; }
+    72%  { opacity: 0.6; }
+    74%  { opacity: 1; }
+    100% { opacity: 0.95; }
+}
