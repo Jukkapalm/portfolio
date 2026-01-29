@@ -21,7 +21,7 @@ html, body {
 .cyber-eye {
     height: 100vh;
     width: auto;
-    right: 0;
+    left: 0;
     top: 0;
     opacity: 0;
 }
@@ -37,6 +37,9 @@ html, body {
 }
 
 #power-core {
+    position: fixed;
+    bottom: 15%;
+    left: 10%;
     color: #00F2FF;
     font-size: clamp(0.75rem, 1vw + 0.5rem, 1.3rem);
     line-height: 1.6;
@@ -47,22 +50,23 @@ html, body {
 
 #overclock-hint {
     position: fixed;
-    bottom: 30px;
-    right: 30px;
+    bottom: 16%;
+    right: 10%;
     color: #00FFFF;
     font-family: 'Courier New', monospace;
-    font-size: 0.8rem;
+    font-size: clamp(0.75rem, 1vw + 0.5rem, 1.3rem);
     letter-spacing: 2px;
-    opacity: 0.5;
+    opacity: 1;
     display: none;
     cursor: pointer;
     border: 1px solid #00FFFF;
     padding: 5px 10px;
+    border-radius: 5px;
+    animation: overclock-pulse 2s infinite;
 }
 
-#overclocking-hint:hover {
-    opacity: 1;
-    background: rgba(0, 255, 255, 0.1);
+.overclock-active {
+    animation: none !important;
 }
 
 @keyframes eye-pulse {
@@ -72,6 +76,12 @@ html, body {
     50% { 
         opacity: 0.6; 
     }
+}
+
+@keyframes overclock-pulse {
+    0% { opacity: 0; }
+    50% { opacity: 1; }
+    100% { opacity: 0; }
 }
 
 @keyframes electrical-awakening {
@@ -90,4 +100,26 @@ html, body {
     72%  { opacity: 0.2; }
     74%  { opacity: 0.1; }
     100% { opacity: 1; }
+}
+
+@media screen and (max-width: 1023px) and (orientation: landscape) {
+    #power-core {
+        bottom: 25%;
+    }
+    #overclock-hint {
+        right: auto;
+        left: 10%;
+        bottom: 10%;
+    }
+}
+
+@media screen and (max-width: 1023px) and (orientation: portrait) {
+    #power-core {
+        bottom: 20%;
+    }
+    #overclock-hint {
+        right: auto;
+        left: 10%;
+        bottom: 12%;
+    }
 }

@@ -130,7 +130,8 @@ window.onload = () => {
             vaiheviive = 1;
             latausNopeus = 1;
             otsikkoVari = "#FF0000";
-            overclockBtn.innerText = "OVERCLOCK_ACTIVATE";
+            overclockBtn.classList.add('overclock-active');
+            overclockBtn.innerText = "SYSTEM_OVERCLOCKED";
             overclockBtn.style.color = "#FF0000";
             overclockBtn.style.borderColor = "#FF0000";
 
