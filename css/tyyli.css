@@ -33,10 +33,10 @@ html, body {
 }
 
 .eye-active {
-    animation: electrical-awakening 10s infinite;
+    animation: electrical-awakening 18s ease-in;
 }
 
-#system-check {
+#power-core {
     color: #00F2FF;
     font-size: clamp(0.75rem, 1vw + 0.5rem, 1.3rem);
     line-height: 1.6;
@@ -45,37 +45,32 @@ html, body {
     padding-left: 15px;
 }
 
-.neural-stream {
-    position: absolute;
-    font-family: monospace;
-    color: #FF003C;
-    text-shadow: 0 0 10px #FF003C;
-    font-size: clamp(1.5rem, 2vw + 0.5rem, 3rem);
-    letter-spacing: 4px;
-    opacity: 0;
-    pointer-events: none;
+#overclock-hint {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    color: #00FFFF;
+    font-family: 'Courier New', monospace;
+    font-size: 0.8rem;
+    letter-spacing: 2px;
+    opacity: 0.5;
+    display: none;
+    cursor: pointer;
+    border: 1px solid #00FFFF;
+    padding: 5px 10px;
 }
 
-.neural-active {
-    animation: neural-wake 5s ease-out forwards;
+#overclocking-hint:hover {
+    opacity: 1;
+    background: rgba(0, 255, 255, 0.1);
 }
 
-@media (min-width: 651px) {
-    .neural-stream {
-        top: 10%;
-        right: 20%;
-        width: 150px;
-        text-align: right;
+@keyframes eye-pulse {
+    0%, 100% { 
+        opacity: 1; 
     }
-}
-
-@media (max-width: 650px) {
-    .neural-stream {
-        top: 50px;
-        left: 50%;
-        transform: translateX(-50%);
-        width: 100%;
-        text-align: center;
+    50% { 
+        opacity: 0.6; 
     }
 }
 
@@ -90,15 +85,9 @@ html, body {
     30%  { opacity: 0; }
     50%  { opacity: 0.4; }
     52%  { opacity: 0.9; }
-    54%  { opacity: 0.3; }
+    54%  { opacity: 0.1; }
     70%  { opacity: 0.9; }
-    72%  { opacity: 0.6; }
-    74%  { opacity: 1; }
-    100% { opacity: 0.95; }
-}
-
-@keyframes neural-wake {
-    0%   { opacity: 0; }
-    50%  { opacity: 0.6; }
+    72%  { opacity: 0.2; }
+    74%  { opacity: 0.1; }
     100% { opacity: 1; }
 }
