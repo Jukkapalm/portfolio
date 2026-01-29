@@ -69,6 +69,37 @@ html, body {
     animation: none !important;
 }
 
+#main-hud {
+    position: fixed;
+    display: none;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.hud-taustakuva {
+    width: auto;
+    height: 100%;
+    background: url(../images/taustakuva.png) no-repeat center;
+    background-size: contain;
+    animation: main-hud-flicker 5s linear;
+}
+
+@keyframes main-hud-flicker {
+    0% { opacity: 0; }
+    2% { opacity: 1; }
+    4% { opacity: 0; }
+    6% { opacity: 1; }
+    8% { opacity: 0; }
+    10% { opacity: 1; }
+    12% { opacity: 0; }
+    15% { opacity: 0.8; }
+    35% { opacity: 0.3; }
+    55% { opacity: 0.75; }
+    100% { opacity: 1; }
+}
+
 @keyframes eye-pulse {
     0%, 100% { 
         opacity: 1; 
