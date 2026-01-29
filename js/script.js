@@ -109,6 +109,16 @@ function kaynnistaSekvenssi() {
                     latausProsentti = 0;
                     kaynnistaSekvenssi();
                 }, vaiheviive)
+            } else {
+                setTimeout(() => {
+                    const bootScreen = document.getElementById("boot-screen");
+                    const mainHud = document.getElementById("main-hud");
+
+                    if (bootScreen && mainHud) {
+                        bootScreen.style.display = "none";
+                        mainHud.style.display = "block"
+                    }
+                }, 2000);
             }
         }
     }
@@ -117,12 +127,16 @@ function kaynnistaSekvenssi() {
 window.onload = () => {
     const silma = document.querySelector('.cyber-eye');
     const overclockBtn = document.getElementById("overclock-hint");
+
     if (silma) silma.classList.add('eye-active');
 
+    // Sekuntti sivun käynnistyksen jälkeen ilmestyy button ylikellotusta varten
     setTimeout(() => {
         if (overclockBtn) overclockBtn.style.display = "block";
     }, 1000);
 
+    // Jos ylikellotusta painaa niin kaikki muuttuu punaiseksi
+    // Ja käynnistys sekvenssi kirjoittaa nopeudella 1
     if (overclockBtn) {
         overclockBtn.onclick = () => {
             kirjoitusnopeus = 1;
