@@ -1,118 +1,151 @@
-const logElement = document.getElementById('system-check');
-const skipBtn = document.getElementById('skip-btn');
-const skipContainer = document.getElementById('skip-container');
-const eyeElement = document.querySelector('.cyber-eye');
+// --- Käynnistys sekvenssi ---
+let vaiheNumero = 0; // Seuraa mikä vaihe (0-4) on menossa
+let riviNumero = 0; // Seuraa monesko rivi on menossa
+let merkkiIndeksi = 0; // Seuraa monesko kirjain rivissä on kirjoitettu
+let latausProsentti = 0; // Pitää kirjaa prosenttilatauksessa
+let kirjoitusnopeus = 35;
+let riviviive = 100;
+let vaiheviive = 500;
+let latausNopeus = 20;
+let otsikkoVari = "#00FFFF";
 
-const neuralElement = document.getElementById('neural-data');
-const brailleChars = "⠁⠂⠃⠄⡀⡁⡂⡃⡄⢀⢁⢂⢃⢄⣀⣁⣂⣃";
-let neuralLength = 0;
-
-const bootSequence = [
-    "> POWER_CORE_STABLE... ",
-    "> OPTIC_SENSORS_ACTIVE... [OK]",
-    "> LINKING_CYBERNETIC_CORTEX... [CONNECTED]",
-    "> INITIALIZING_SYNTHETIC_LOGIC_v8.4",
-    "> DECODING_ALIEN_ARTIFACT_DATA... [ENCRYPTED]",
-    "> BIOMETRIC_SIGNATURE: UNKNOWN_USER",
-    "> ACCESS_LEVEL: GUEST_RESTRICTED",
-    "> DOWNLOADING_EXPERIENCE_DATA... ",
-    "> OVERRIDING_HUMAN_SAFETY_LIMITS",
-    "> NEURAL_UPLOAD_READY",
-    "> WELCOME, OPERATOR. SELECT DATA_STREAM TO BEGIN..."
+// Käynnistys sekvenssin vaiheet
+const vaiheet = [
+    {
+        otsikko: "PHASE_01/05: SYST_PWR_INIT",
+        rivit: ["> INITIALIZING_FUSION_CELL...", "> VOLTAGE_STABLE: 1.21GW", "> COOLANT_FLOW: OPTIMAL", "> HARDWARE_INTEGRITY: %%"],
+        loppukuittaus: "> POWER_CORE: ONLINE"
+    },
+    {
+        otsikko: "PHASE_02/05: NEURAL_SYNC",
+        rivit: ["> CONNECTING_CORTEX...", "> CPU_CORES: 256_ACTIVE", "> SYNAPTIC_LINKS: ESTABLISHED", "> NEURAL_LATENCY: %ms"],
+        loppukuittaus: "> NEURAL_LINK: STABLE"
+    },
+    {
+        otsikko: "PHASE_03/05: OPTIC_CALIB",
+        rivit: ["> OPTIC_SENSORS: CALIBRATING...", "> THERMAL_VISION: ONLINE", "> AUDITORY_BUFFERS: CLEARED", "> ENVIRONMENT_MAPPING: %%"],
+        loppukuittaus: "> SENSORS: ACTIVE"
+    },
+    {
+        otsikko: "PHASE_04/05: DATA_DECRYPT",
+        rivit: ["> DETECTING_EXTERNAL_SIGNAL...", "> ENCRYPTED_DATA_STREAM_FOUND", "> ATTEMPTING_DECRYPTION...", "> DECRYPTION_PROGRESS: %%"],
+        loppukuittaus: "> VAULT_OPENED: PROJECT_ACCESS_GRANTED"
+    },
+    {
+        otsikko: "PHASE_05/05: CORE_AWAKE",
+        rivit: ["> LOADING_PERSONALITY_MATRIX...", "> MEMORY_RECALL: ACTIVE", "> SYSTEM_STABILITY: %%"],
+        loppukuittaus: "> WELCOME_USER. SELECT_PROJECT_TO_BEGIN"
+    }
 ];
 
-let lineIndex = 0;
-let charIndex = 0;
-let currentText = "";
-let typingSpeed = 40;
+// --- Päämoottori ---
+function kaynnistaSekvenssi() {
+    const nayttoElementti = document.getElementById("power-core");
+    const silmaElementti = document.querySelector('.cyber-eye');
+    const nykyinenVaihe = vaiheet[vaiheNumero];
 
-function updateNeuralStream() {
-    if (!neuralElement || !neuralElement.classList.contains('neural-active')) return;
-
-    if (neuralLength < 12) {
-        neuralLength++;
+    // Silmän tilan päivitys
+    if (vaiheNumero >= 3 && silmaElementti) {
+        silmaElementti.style.animation = "eye-pulse 4s infinite ease-in-out";
+        silmaElementti.style.opacity = "0.95";
     }
 
-    let line1 = "";
-    let line2 = "";
-
-    for (let i = 0; i < neuralLength; i++) {
-        line1 += brailleChars.charAt(Math.floor(Math.random() * brailleChars.length));
-        line2 += brailleChars.charAt(Math.floor(Math.random() * brailleChars.length));
+    // --- Otsikoiden kirjoittaminen sekvenssissä ---
+    if (nayttoElementti.innerHTML === "" || nayttoElementti.innerHTML === "<br>") {
+        nayttoElementti.innerHTML = `<span style="color: ${otsikkoVari}; font-weight: bold;">${nykyinenVaihe.otsikko}</span><br><br>`;
     }
-    neuralElement.innerText = line1 + "\n" + line2;
-    setTimeout(updateNeuralStream, 600); // Vaihtumisnopeus
-}
 
-if (skipBtn) {
-    skipBtn.addEventListener('click', () => {
-        typingSpeed = 2;
-        logElement.style.color = "#FF003C";
-        logElement.style.textShadow = "0 0 10px #FF003C";
+    // --- Rivien käsittely ---
+    if (riviNumero < nykyinenVaihe.rivit.length) {
+        let tekstiRivi = nykyinenVaihe.rivit[riviNumero];
 
-        currentText += "<br><span style='font-weight: bold;'>[ ! ] OVERCLOCK_MODE: ACTIVE - BYPASSING_PROTOCOLS...</span><br>";
+        // Latausanimaatio
+        if (tekstiRivi.includes("%")) {
+            if (latausProsentti <= 100) {
+                let rivitRuudulla = nayttoElementti.innerHTML.split("<br>");
 
-        if (skipContainer) skipContainer.style.display = "none";
-    });
-}
+                // Phase 2 latausprosentit
+                let naytaArvo = nykyinenVaihe.otsikko.includes("02") ? (100 - (latausProsentti * 0.99)).toFixed(1) : latausProsentti;
 
-function prosenttiLataus(percent, callback) {
-    if (percent <= 100) {
-        logElement.innerHTML = currentText + percent + "%";
-        let speed = typingSpeed < 10 ? 1 : 20;
-        setTimeout(() => prosenttiLataus(percent + 2, callback), speed);
-    } else {
-        currentText += "100%<br>";
-        callback();
-    }
-}
+                rivitRuudulla[rivitRuudulla.length - 1] = tekstiRivi.replace("%", naytaArvo);
+                nayttoElementti.innerHTML = rivitRuudulla.join("<br>");
 
-function typeWriter() {
-    if (lineIndex < bootSequence.length) {
-        let fullLine = bootSequence[lineIndex];
-
-        if (fullLine.includes("DECODING_ALIEN_ARTIFACT_DATA") && charIndex === 0) {
-            if (neuralElement) {
-                neuralElement.classList.add('neural-active');
-                updateNeuralStream();
-            }
-        }
-
-        if (lineIndex === 0 && charIndex === 0 && eyeElement) {
-            eyeElement.classList.add('eye-active');
-        }
-
-        if (charIndex < fullLine.length) {
-            currentText += fullLine.charAt(charIndex);
-            logElement.innerHTML = currentText;
-            charIndex++;
-            setTimeout(typeWriter, typingSpeed);
-        } else {
-            if (fullLine.endsWith("... ")) {
-                prosenttiLataus(0, () => {
-                    lineIndex++;
-                    charIndex = 0;
-                    setTimeout(typeWriter, typingSpeed < 10 ? 20 : 500);
-                });
+                latausProsentti += 2;
+                setTimeout(kaynnistaSekvenssi, latausNopeus);
             } else {
-                currentText += "<br>";
-                lineIndex++;
-                charIndex = 0;
-
-                let pause = typingSpeed < 10 ? 20 : 500;
-                setTimeout(typeWriter, pause);
+                nayttoElementti.innerHTML += "<br>";
+                latausProsentti = 0;
+                riviNumero++;
+                setTimeout(kaynnistaSekvenssi, riviviive);
             }
         }
-    } else {
-        if (eyeElement) {
-            eyeElement.classList.add('eye-stable');
+        // Typewriter
+        else if (merkkiIndeksi < tekstiRivi.length) {
+            nayttoElementti.innerHTML += tekstiRivi.charAt(merkkiIndeksi++);
+            setTimeout(kaynnistaSekvenssi, kirjoitusnopeus);
+        }
+        // Rivi valmis
+        else {
+            nayttoElementti.innerHTML += "<br>";
+            riviNumero++;
+            merkkiIndeksi = 0;
+            setTimeout(kaynnistaSekvenssi, riviviive)
+        }
+    }
+    // Vaiheen lopetus ja siirtymä
+    else {
+        if (merkkiIndeksi === 0) nayttoElementti.innerHTML += "<br>";
+
+        if (merkkiIndeksi < nykyinenVaihe.loppukuittaus.length) {
+            nayttoElementti.innerHTML += nykyinenVaihe.loppukuittaus.charAt(merkkiIndeksi++);
+            setTimeout(kaynnistaSekvenssi,kirjoitusnopeus);
+        } else {
+            vaiheNumero++;
+            if (vaiheNumero < vaiheet.length) {
+                setTimeout(() => {
+                    nayttoElementti.innerHTML = "";
+                    riviNumero = 0;
+                    merkkiIndeksi = 0;
+                    latausProsentti = 0;
+                    kaynnistaSekvenssi();
+                }, vaiheviive)
+            }
         }
     }
 }
 
 window.onload = () => {
+    const silma = document.querySelector('.cyber-eye');
+    const overclockBtn = document.getElementById("overclock-hint");
+    if (silma) silma.classList.add('eye-active');
+
     setTimeout(() => {
-        if (skipContainer) skipContainer.style.display = "block";
-        typeWriter();
+        if (overclockBtn) overclockBtn.style.display = "block";
     }, 1000);
+
+    if (overclockBtn) {
+        overclockBtn.onclick = () => {
+            kirjoitusnopeus = 1;
+            riviviive = 1;
+            vaiheviive = 1;
+            latausNopeus = 1;
+            otsikkoVari = "#FF0000";
+            overclockBtn.innerText = "OVERCLOCK_ACTIVATE";
+            overclockBtn.style.color = "#FF0000";
+            overclockBtn.style.borderColor = "#FF0000";
+
+            const naytto = document.getElementById("power-core");
+            if (naytto) {
+                naytto.style.color = "#FF0000";
+                naytto.style.textShadow = "0 0 10px #FF0000";
+            }
+
+            const silma = document.querySelector('.cyber-eye');
+            if (silma) {
+                silma.classList.remove('eye-active');
+                silma.style.opacity = "1";
+            }
+        };
+    }
+    kaynnistaSekvenssi();
 }
