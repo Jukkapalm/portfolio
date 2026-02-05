@@ -2,42 +2,63 @@
 html, body {
     margin: 0;
     padding: 0;
-    width: 100%;
-    min-height: 100.1dvh;
+    width: 100vw;
+    height: 100vh;
+    /*min-height: 100.1dvh;*/
     background-color: #000;
     font-family: "Courier New", monospace;
-    -webkit-text-size-adjust: 100%;
-    overflow-x: hidden;
+    /*-webkit-text-size-adjust: 100%;
+    overflow-x: hidden;*/
 }
 
 
 /* Silmän sijainti */
 .cyber-eye {
-    position: fixed;
-    height: 100dvh;
+    background: url(../images/kyborgin_silma_tausta.png);
+    position: relative;
+    height: 100vh;
     width: auto;
-    right: 15vw;
     top: 0;
+    left: 0;
     opacity: 0;
-    z-index: 1;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
     animation: 
         electrical-awakening 23s linear forwards,
         eye-pulse 4s linear 23s infinite;
 }
 
+.data-layer {
+    position: relative;
+    color: #00FF9F;
+    margin-top: -100vh;
+    width: 100vw;
+    height: 35vh;
+    z-index: 2;
+    font-size: clamp(0.9rem, 1vw + 0.5rem, 1.3rem);
+    font-family: "Courier New", monospace;
+    overflow: hidden;
+}
+#binaariLuvut1,
+#binaariLuvut2 {
+    position: absolute;
+    white-space: nowrap;
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
+}
 
 /* Käynnistys sekvenssi kontti */
 #boot-screen {
-    position: fixed;
+    position: relative;
     top: 0;
     left: 0;
-    width: 100%;
-    height: 100dvh;
+    width: 100vw;
+    height: 100vh;
+    margin-top: -100vh;
     display: flex;
     justify-content: center;
-    z-index: 2;
 }
-
 
 /* Käynnistys sekvenssi phaset oletuksena visibility hidden */
 #phase-1,
@@ -45,24 +66,24 @@ html, body {
 #phase-3,
 #phase-4,
 #phase-5 {
-    position: fixed;
-    bottom: 15dvh;
-    left: 10vw;
+    position: absolute;
     color: #00FF9F;
+    bottom: 15vh;
+    left: 10vw;
     font-size: clamp(0.9rem, 1vw + 0.5rem, 1.3rem);
-    line-height: 1.6;
     text-shadow: 0 0 8px #00FF9F;
     border-left: 2px solid #00FF9F;
+    line-height: 1.6;
     padding-left: 15px;
     visibility: hidden;
 }
 
-
 /* Kellotus napin asetukset */
 #overclock-hint {
-    position: fixed;
-    bottom: 16%;
-    right: 10%;
+    position: absolute;
+    bottom: 16vh;
+    right: 8vw;
+    left: auto;
     color: #00FF9F;
     font-family: 'Courier New', monospace;
     font-size: clamp(0.75rem, 1vw + 0.5rem, 1.3rem);
@@ -75,14 +96,39 @@ html, body {
     border-radius: 5px;
     animation: overclock-pulse 3s infinite;
 }
-
-
+.ready-to-enter {
+    border-color: #FFF;
+    color: #FFF;
+    background: rgba(0, 255, 159, 0.2);
+    box-shadow: 0 0 15px #00FF9F;
+    font-weight: bold;
+}
 /* Jos kellotus nappia painettu niin vilkkumis animaatio pois */
 .overclock-active {
     animation: none !important;
 }
 
-
+/* Asetukset näkymälle käynnistys sekvenssin jälkeen */
+#main-content {
+    position: absolute;
+    display: none;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    visibility: hidden;
+    z-index: 3;
+}
+.hud-taustakuva {
+    width: auto;
+    height: 100vh;
+    background: url(../images/taustakuva.png);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    animation: main-hud-flicker 4s linear;
+    opacity: 1;
+}
 /* Navbarin asetukset */
 .hud-header {
     position: fixed;
@@ -95,7 +141,163 @@ html, body {
     align-items: center;
     opacity: 0;
 }
+.header-center-title,
+.navbar-brand,
+.sivusto {
+    font-family: "Bruno Ace SC", sans-serif;
+    margin: 0;
+    color: #00FF9F;
+}
+.braille-container {
+    color: #00FF9F;
+    font-family: serif;
+    font-size: 1.2rem;
+    opacity: 0.6;
+    user-select: none;
+}
 .hud-header.is-active {
+    opacity: 1;
+}
+.system-flicker {
+    animation: header-flicker 5s linear;
+}
+
+@media screen and (max-width: 844px) and (orientation: landscape) {
+    #phase-1,
+    #phase-2,
+    #phase-3,
+    #phase-4,
+    #phase-5 {
+        left: 6vw;
+    }
+    #overclock-hint {
+        right: 4vw;
+    }
+}
+@media screen and (max-width: 768px) and (orientation: portrait) {
+    #phase-1,
+    #phase-2,
+    #phase-3,
+    #phase-4,
+    #phase-5 {
+        left: 5vw;
+        bottom: 10vh;
+    }
+    #overclock-hint {
+        position: fixed;
+        bottom: auto;
+        right: auto;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        margin: 0;
+
+    }
+}
+/* Kellotus napin pulssaaminen */
+@keyframes overclock-pulse {
+    0% { opacity: 0; }
+    50% { opacity: 1; }
+    100% { opacity: 0; }
+}
+/* Silmän pulssaaminen animaatio */
+@keyframes eye-pulse {
+    0%, 100% { 
+        opacity: 1; 
+    }
+    50% { 
+        opacity: 0.6; 
+    }
+}
+/* Silmän heräämis animaatio */
+@keyframes electrical-awakening {
+    0% { opacity: 0; }
+    5% { opacity: 0.2; }
+    6% { opacity: 0; }
+    6.5% { opacity: 1; }
+    6.75% { opacity: 0; }
+    7% { opacity: 1; }
+    7.25% { opacity: 0; }
+    7.5% { opacity: 1; }
+    15% { opacity: 0.6; }
+    20%  { opacity: 0.3; }
+    20.25%  { opacity: 1; }
+    20.50%  { opacity: 0; }
+    20.75%  { opacity: 1; }
+    40%  { opacity: 0.3; }
+    40.25% { opacity: 1; }
+    40.50% { opacity: 0; }
+    40.75% { opacity: 1; }
+    41% { opacity: 0; }
+    41.25% { opacity: 1; }
+    50%  { opacity: 0.2; }
+    70%  { opacity: 0.7; }
+    80%  { opacity: 0.4; }
+    85% { opacity: 1; }
+    100% { opacity: 1; }
+}
+
+/* Pää näkymän flicker animaatio */
+@keyframes main-hud-flicker {
+    0% { opacity: 0; }
+    1% { opacity: 1; }
+    2% { opacity: 0; }
+    3% { opacity: 1; }
+    4% { opacity: 0; }
+    5% { opacity: 1; }
+    12% { opacity: 0; }
+    15% { opacity: 1; }
+    35% { opacity: 0; }
+    55% { opacity: 1; }
+    75% { opacity: 0; }
+    100% { opacity: 1; }
+}
+@keyframes header-flicker {
+    0% { opacity: 0; }
+    5% { opacity: 1; }
+    6% { opacity: 0; }
+    6.5% { opacity: 1; }
+    6.75% { opacity: 0; }
+    7% { opacity: 1; }
+    7.25% { opacity: 0; }
+    7.5% { opacity: 1; }
+    15% { opacity: 0; }
+    20%  { opacity: 1; }
+    20.25%  { opacity: 0; }
+    20.50%  { opacity: 1; }
+    20.75%  { opacity: 0; }
+    40%  { opacity: 1; }
+    40.25% { opacity: 0; }
+    40.50% { opacity: 1; }
+    40.75% { opacity: 0; }
+    41% { opacity: 1; }
+    41.25% { opacity: 0; }
+    50%  { opacity: 1; }
+    70%  { opacity: 0; }
+    80%  { opacity: 1; }
+    85% { opacity: 0; }
+    100% { opacity: 1; }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*.hud-header.is-active {
     opacity: 1;
 }
 .system-flicker {
@@ -144,11 +346,11 @@ html, body {
 }
 .project-tag {
     border-bottom: 1px solid #00FF9F;
-}
+}*/
 
 
 /* Asetukset näkymälle käynnistys sekvenssin jälkeen */
-#main-content {
+/*#main-content {
     position: fixed;
     display: none;
     top: 0;
@@ -166,11 +368,57 @@ html, body {
     background-repeat: no-repeat;
     background-size: contain;
     animation: main-hud-flicker 4s linear;
-    opacity: 0.6;
+    opacity: 1;
+}*/
+
+
+
+/*.testi-sailio {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 5;
 }
+.yksittainen-kortti {
+    width: 85%;
+    max-width: 400px;
+    height: auto;
+    min-height: 200px;
+    background: rgba(0, 255,159,0.1);
+    border: 2px solid #00FF9F;
+    padding: 20px;
+    color: #00FF9F;
+    overflow-y: auto;
+}
+.kortti-otsikko {
+    font-family: "Bruno Ace SC", sans-serif;
+    margin-bottom: 10px;
+}
+.kortti-viiva {
+    width: 90%;
+    height: 2px;
+    background-color: #00FF9F;
+    margin-bottom: 15px;
+    box-shadow: 0 0 5px #00FF9F;
+}
+.kortti-kuvaus {
+    font-family: "Courier New", monospace;
+    margin-bottom: 25px;
+}
+.kortti-media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}*/
+
 
 /* Footerin asetukset */
-.footer-container {
+/*.footer-container {
     position: fixed;
     bottom: 5vh;
     right: 5vw;
@@ -188,160 +436,18 @@ html, body {
 }
 #footer-tech {
     margin-bottom: 2%;
-}
+}*/
 
 
-/* Silmän pulssaaminen animaatio */
-@keyframes eye-pulse {
-    0%, 100% { 
-        opacity: 1; 
-    }
-    50% { 
-        opacity: 0.6; 
-    }
-}
 
 
-/* Pää näkymän flicker animaatio */
-@keyframes main-hud-flicker {
-    0% { opacity: 0; }
-    1% { opacity: 1; }
-    2% { opacity: 0; }
-    3% { opacity: 1; }
-    4% { opacity: 0; }
-    5% { opacity: 1; }
-    12% { opacity: 0; }
-    15% { opacity: 0.8; }
-    35% { opacity: 0.1; }
-    55% { opacity: 0.75; }
-    100% { opacity: 0.6; }
-}
 
 
-/* Silmän heräämis animaatio */
-@keyframes electrical-awakening {
-    0% { opacity: 0; }
-    5% { opacity: 0.2; }
-    6% { opacity: 0; }
-    6.5% { opacity: 1; }
-    6.75% { opacity: 0; }
-    7% { opacity: 1; }
-    7.25% { opacity: 0; }
-    7.5% { opacity: 1; }
-    15% { opacity: 0.6; }
-    20%  { opacity: 0.3; }
-    20.25%  { opacity: 1; }
-    20.50%  { opacity: 0; }
-    20.75%  { opacity: 1; }
-    40%  { opacity: 0.3; }
-    40.25% { opacity: 1; }
-    40.50% { opacity: 0; }
-    40.75% { opacity: 1; }
-    41% { opacity: 0; }
-    41.25% { opacity: 1; }
-    50%  { opacity: 0.2; }
-    70%  { opacity: 0.7; }
-    80%  { opacity: 0.4; }
-    85% { opacity: 1; }
-    100% { opacity: 1; }
-}
 
 
-@keyframes header-flicker {
-    0% { opacity: 0; }
-    5% { opacity: 1; }
-    6% { opacity: 0; }
-    6.5% { opacity: 1; }
-    6.75% { opacity: 0; }
-    7% { opacity: 1; }
-    7.25% { opacity: 0; }
-    7.5% { opacity: 1; }
-    15% { opacity: 0; }
-    20%  { opacity: 1; }
-    20.25%  { opacity: 0; }
-    20.50%  { opacity: 1; }
-    20.75%  { opacity: 0; }
-    40%  { opacity: 1; }
-    40.25% { opacity: 0; }
-    40.50% { opacity: 1; }
-    40.75% { opacity: 0; }
-    41% { opacity: 1; }
-    41.25% { opacity: 0; }
-    50%  { opacity: 1; }
-    70%  { opacity: 0; }
-    80%  { opacity: 1; }
-    85% { opacity: 0; }
-    100% { opacity: 1; }
-}
 
 
-/* Kellotus napin pulssaaminen */
-@keyframes overclock-pulse {
-    0% { opacity: 0; }
-    50% { opacity: 1; }
-    100% { opacity: 0; }
-}
 
 
-/* Media kyselyt mihin kohtaa näyttöä silmä asettuu */
-@media (min-width: 1024px) and (max-width: 1368px) {
-    .cyber-eye {
-        right: 0;
-    }
-    .hud-taustakuva {
-        width: 100%;
-        height: 100%;
-        background-size: cover;
-    }
-}
-@media screen and (max-width: 767px) and (orientation: portrait) {
-    .cyber-eye {
-        right: -55vw;
-    }
-}
-@media screen and (min-width: 768px) and (orientation: portrait) {
-    .cyber-eye {
-        right: -40vw;
-    }
-}
-@media screen and (min-width: 540px) and (max-width: 691px) and (orientation: portrait) {
-    .cyber-eye {
-        right: -30vw;
-    }
-}
 
 
-/* Kellotus napin asetukset eri näytöillä */
-@media screen and (max-width: 1023px) and (orientation: landscape) {
-    #phase-1,
-    #phase-2,
-    #phase-3,
-    #phase-4,
-    #phase-5 {
-        bottom: 25%;
-    }
-    #overclock-hint {
-        right: auto;
-        left: 10%;
-        bottom: 10%;
-    }
-}
-@media screen and (max-width: 1023px) and (orientation: portrait) {
-    #phase-1,
-    #phase-2,
-    #phase-3,
-    #phase-4,
-    #phase-5 {
-        bottom: 20%;
-    }
-    #overclock-hint {
-        right: auto;
-        left: 10%;
-        bottom: 12%;
-    }
-    .hud-taustakuva {
-        width: 100%;
-        height: 100%;
-        background-size: cover;
-    }
-}
