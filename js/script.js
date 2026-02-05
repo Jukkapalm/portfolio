@@ -39,6 +39,7 @@ const phase5Ele = document.getElementById("phase-5");
 
 // Funktioiden ketju käynnistys sekvenssiin
 function kaynnistysSekvenssi() {
+    if (i === 0) paivitaBin1(1, 1);
     phase1Ele.style.visibility = "visible";
 
     if (i === 0) {
@@ -56,6 +57,7 @@ function kaynnistysSekvenssi() {
     }
 }
 function tulostaTxt2() {
+    if (i === 0) paivitaBin2(1, 2);
     if (i < txt2.length) {
         phase1Ele.innerHTML += txt2.charAt(i);
         i++;
@@ -67,6 +69,7 @@ function tulostaTxt2() {
     }
 }
 function tulostaTxt3() {
+    if (i === 0) paivitaBin1(1, 3);
     if (i < txt3.length) {
         phase1Ele.innerHTML += txt3.charAt(i);
         i++;
@@ -78,6 +81,7 @@ function tulostaTxt3() {
     }
 }
 function tulostaTxt4() {
+    if (i === 0) paivitaBin2(1, 4)
     if (i < txt4.length) {
         phase1Ele.innerHTML += txt4.charAt(i);
         i++;
@@ -98,6 +102,7 @@ function prosenttiLataus() {
             latausProsentti = 0;
             i = 0;
             pohjaTeksti = "";
+            paivitaBin1(1, 5);
             phase1Ele.innerHTML += "<br><b>> POWER_CORE: ONLINE</b>";
             setTimeout(siirryPhase2, vaiheViive);
         }, statusViive);
@@ -107,6 +112,7 @@ function siirryPhase2() {
     phase1Ele.style.display = "none";
     phase2Ele.style.visibility = "visible";
 
+    if (i === 0) paivitaBin2(2, 1);
     if (i === 0) {
         phase2Ele.innerHTML += "<br><br>";
     }
@@ -122,6 +128,7 @@ function siirryPhase2() {
     }
 }
 function tulostaTxt6() {
+    if (i === 0) paivitaBin1(2, 2);
     if (i < txt6.length) {
         phase2Ele.innerHTML += txt6.charAt(i);
         i++;
@@ -133,6 +140,7 @@ function tulostaTxt6() {
     }
 }
 function tulostaTxt7() {
+    if (i === 0) paivitaBin2(2, 3);
     if (i < txt7.length) {
         phase2Ele.innerHTML += txt7.charAt(i);
         i++;
@@ -144,6 +152,7 @@ function tulostaTxt7() {
     }
 }
 function tulostaTxt8() {
+    if (i === 0) paivitaBin1(2, 4);
     if (i < txt8.length) {
         phase2Ele.innerHTML += txt8.charAt(i);
         i++;
@@ -164,6 +173,7 @@ function msLataus() {
             latausProsentti = 0;
             i = 0;
             pohjaTeksti = "";
+            paivitaBin2(2, 5)
             phase2Ele.innerHTML += "<br><b>> NEURAL_LINK: STABLE</b>";
             setTimeout(siirryPhase3, vaiheViive);
         }, statusViive);
@@ -173,6 +183,7 @@ function siirryPhase3() {
     phase2Ele.style.display = "none";
     phase3Ele.style.visibility = "visible";
 
+    if (i === 0) paivitaBin1(3, 1);
     if (i === 0) {
         phase3Ele.innerHTML += "<br><br>";
     }
@@ -188,6 +199,7 @@ function siirryPhase3() {
     }
 }
 function tulostaTxt10() {
+    if (i === 0) paivitaBin2(3, 2);
     if (i < txt10.length) {
         phase3Ele.innerHTML += txt10.charAt(i);
         i++;
@@ -199,6 +211,7 @@ function tulostaTxt10() {
     }
 }
 function tulostaTxt11() {
+    if (i === 0) paivitaBin1(3, 3);
     if (i < txt11.length) {
         phase3Ele.innerHTML += txt11.charAt(i);
         i++;
@@ -210,6 +223,7 @@ function tulostaTxt11() {
     }
 }
 function tulostaTxt12() {
+    if (i === 0) paivitaBin2(3, 4);
     if (i < txt12.length) {
         phase3Ele.innerHTML += txt12.charAt(i);
         i++;
@@ -230,6 +244,7 @@ function prosenttiLataus2() {
             latausProsentti = 0;
             i = 0;
             pohjaTeksti = "";
+            paivitaBin1(3, 5)
             phase3Ele.innerHTML += "<br><b>> SENSORS: ACTIVE</b>";
             setTimeout(siirryPhase4, vaiheViive);
         }, statusViive);
@@ -239,6 +254,7 @@ function siirryPhase4() {
     phase3Ele.style.display = "none";
     phase4Ele.style.visibility = "visible";
 
+    if (i === 0) paivitaBin2(4, 1);
     if (i === 0) {
         phase4Ele.innerHTML += "<br><br>";
     }
@@ -254,6 +270,7 @@ function siirryPhase4() {
     }
 }
 function tulostaTxt14() {
+    if (i === 0) paivitaBin1(4, 2);
     if (i < txt14.length) {
         phase4Ele.innerHTML += txt14.charAt(i);
         i++;
@@ -265,6 +282,7 @@ function tulostaTxt14() {
     }
 }
 function tulostaTxt15() {
+    if (i === 0) paivitaBin2(4, 3);
     if (i < txt15.length) {
         phase4Ele.innerHTML += txt15.charAt(i);
         i++;
@@ -276,6 +294,7 @@ function tulostaTxt15() {
     }
 }
 function tulostaTxt16() {
+    if (i === 0) paivitaBin1(4, 4);
     if (i < txt16.length) {
         phase4Ele.innerHTML += txt16.charAt(i);
         i++;
@@ -296,6 +315,7 @@ function prosenttiLataus3() {
             latausProsentti = 0;
             i = 0;
             pohjaTeksti = "";
+            paivitaBin2(4, 5)
             phase4Ele.innerHTML += "<br><b>> VAULT_OPENED: PROJECT_ACCESS_GRANTED</b>";
             setTimeout(siirryPhase5, vaiheViive);
         }, statusViive);
@@ -305,6 +325,7 @@ function siirryPhase5() {
     phase4Ele.style.display = "none";
     phase5Ele.style.visibility = "visible";
 
+    if (i === 0) paivitaBin1(5, 1);
     if (i === 0) {
         phase5Ele.innerHTML += "<br><br>";
     }
@@ -320,6 +341,7 @@ function siirryPhase5() {
     }
 }
 function tulostaTxt18() {
+    if (i === 0) paivitaBin2(5, 2);
     if (i < txt18.length) {
         phase5Ele.innerHTML += txt18.charAt(i);
         i++;
@@ -331,6 +353,7 @@ function tulostaTxt18() {
     }
 }
 function tulostaTxt19() {
+    if (i === 0) paivitaBin1(5, 3);
     if (i < txt19.length) {
         phase5Ele.innerHTML += txt19.charAt(i);
         i++;
@@ -351,11 +374,59 @@ function prosenttiLataus4() {
             latausProsentti = 0;
             i = 0;
             pohjaTeksti = "";
+            paivitaBin2(5, 4);
             phase5Ele.innerHTML += "<br><b>> WELCOME_USER. SELECT_PROJECT_TO_BEGIN</b>";
-            setTimeout(avaaMainHud, 1500);
+            enterReady();
         }, statusViive);
     }
 }
+
+function paivitaBin1(vaihe, rivi) {
+    const b1 = document.getElementById("binaariLuvut1");
+    const b2 = document.getElementById("binaariLuvut2");
+
+    b1.textContent = vaihe.toString(2).padStart(8, '0') + "  " + rivi.toString(2).padStart(8, '0');
+    b1.style.left = (Math.floor(Math.random() * 40) + 5) + "vw";
+    b1.style.top = (Math.floor(Math.random() * 20) + 5) + "vh";
+
+    b1.style.opacity = "0.5";
+
+    if (b2) {
+        b2.style.opacity = "0";
+    }
+}
+
+function paivitaBin2(vaihe, rivi) {
+    const b1 = document.getElementById("binaariLuvut1");
+    const b2 = document.getElementById("binaariLuvut2");
+
+    b2.textContent = vaihe.toString(2).padStart(8, '0') + " " + rivi.toString(2).padStart(8, '0');
+    b2.style.left = (Math.floor(Math.random() * 40) + 5) + "vw";
+    b2.style.top = (Math.floor(Math.random() * 20) + 5) + "vh";
+
+    b2.style.opacity = "0.5";
+
+    if (b1) {
+        b1.style.opacity = "0";
+    }
+}
+
+        
+function enterReady() {
+    const overclockBtn = document.getElementById("overclock-hint");
+
+    if (overclockBtn) {
+        overclockBtn.innerText = "ESTABLISH NEURAL LINK";
+        overclockBtn.classList.add("ready-to-enter");
+
+        overclockBtn.onclick = () => {
+            overclockBtn.style.backgroundColor = "#00FF9F";
+            overclockBtn.style.color = "#000";
+            avaaMainHud();
+        }
+    }
+}
+
 function avaaMainHud() {
     const bootScreen = document.getElementById("boot-screen");
     const mainContent = document.getElementById("main-content");
@@ -394,10 +465,11 @@ function avaaMainHud() {
 function kaynnistaHudElementit() {
     const header = document.getElementById("main-header");
     const footer = document.querySelector(".footer-container");
+    const title = document.querySelector(".header-center-title");
 
     if (header) {
         header.classList.add("is-active");
-        header.classList.add("system-flicker");
+        title.classList.add("system-flicker");
     }
 
     updateBraille();
@@ -453,7 +525,7 @@ window.onload = () => {
 
             const eyeEle = document.querySelector(".cyber-eye");
             if (eyeEle) {
-                eyeEle.style.animation = "none";
+                eyeEle.style.animation = "eye-pulse 2s linear infinite";
                 eyeEle.style.opacity = "1";
             }
         };
