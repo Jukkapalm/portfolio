@@ -1,5 +1,4 @@
 // Globaalit muuttujat
-
 let i = 0; // Seuraa indeksiä teksteissä
 let latausProsentti = 0;  // Seuraa indeksiä latausprosenteissa
 let prosenttiSpeed = 20;
@@ -8,6 +7,8 @@ let pohjaTeksti = "";  // Tilapäinen muuttuja johon tallennetaan meneillään o
 let riviViive = 300;
 let vaiheViive = 1000;
 let statusViive = 1000;
+
+
 
 // Tekstit tarkistuksiin jotka käynnistys sekvenssissä suoritetaan
 let txt1 = "> INITIALIZING_FUSION_CELL...";
@@ -30,12 +31,16 @@ let txt17 = "> LOADING_PERSONALITY_MATRIX...";
 let txt18 = "> MEMORY_RECALL: ACTIVE";
 let txt19 = "> SYSTEM_STABILITY:"
 
+
+
 // Haetaan elementti id:n perusteella
 const phase1Ele = document.getElementById("phase-1");
 const phase2Ele = document.getElementById("phase-2");
 const phase3Ele = document.getElementById("phase-3");
 const phase4Ele = document.getElementById("phase-4");
 const phase5Ele = document.getElementById("phase-5");
+
+
 
 // Funktioiden ketju käynnistys sekvenssiin
 function kaynnistysSekvenssi() {
@@ -381,6 +386,9 @@ function prosenttiLataus4() {
     }
 }
 
+
+
+// Apufunktiot paivitaBin1 ja paivitaBin2 binäärien päivittymiseen
 function paivitaBin1(vaihe, rivi) {
     const b1 = document.getElementById("binaariLuvut1");
     const b2 = document.getElementById("binaariLuvut2");
@@ -395,7 +403,6 @@ function paivitaBin1(vaihe, rivi) {
         b2.style.opacity = "0";
     }
 }
-
 function paivitaBin2(vaihe, rivi) {
     const b1 = document.getElementById("binaariLuvut1");
     const b2 = document.getElementById("binaariLuvut2");
@@ -411,7 +418,10 @@ function paivitaBin2(vaihe, rivi) {
     }
 }
 
-        
+
+
+// Funktio joka käynnistys sekvenssin jälkeen muuttaa overclock button niin
+// että painalluksen jälkeen avautuu pääsisältö
 function enterReady() {
     const overclockBtn = document.getElementById("overclock-hint");
 
@@ -427,6 +437,10 @@ function enterReady() {
     }
 }
 
+
+
+// Pääsisältö ja sen funktio joka piilottaa käynnistyksen silmän ja boot-screenin
+// sekä tuo pääsisällön näkyviin
 function avaaMainHud() {
     const bootScreen = document.getElementById("boot-screen");
     const mainContent = document.getElementById("main-content");
@@ -462,6 +476,9 @@ function avaaMainHud() {
     }, 1600);
 }
 
+
+
+// Pääsisällön animaatiot (flickerit)
 function kaynnistaHudElementit() {
     const header = document.getElementById("main-header");
     const footer = document.querySelector(".footer-container");
@@ -481,6 +498,9 @@ function kaynnistaHudElementit() {
     }
 }
 
+
+
+// Päivitetään braille headerissa
 function updateBraille() {
     const brailleChars = "⠁⠂⠃⠄⡀⡁⡂⡃⡄⢀⢁⢂⢃⢄⣀⣁⣂⣃⠃⠗⠁⠊⠇⠵⠴⠷⠦";
     const left = document.getElementById("braille-left");
@@ -496,6 +516,9 @@ function updateBraille() {
     setTimeout(updateBraille, Math.random() * 2000 + 500);
 }
 
+
+
+// Tapahtuma ketju sivuun latauksen yhteydessä
 window.onload = () => {
 
     // Kellotus nappi ilmestyy 1 sek käynnistyksen jälkeen
@@ -504,6 +527,7 @@ window.onload = () => {
         if (overclockBtn) overclockBtn.style.display = "block";
     }, 1000);
 
+    // Jos overclock buttinia painetaan niin muuttaa tekstit ja buttonin punaiseksi
     if (overclockBtn) {
         overclockBtn.onclick = () => {
             kirjoitusNopeus = 5;
@@ -515,6 +539,13 @@ window.onload = () => {
             overclockBtn.innerText = "SYSTEM_OVERCLOCKED";
             overclockBtn.style.color = "#FF0000";
             overclockBtn.style.borderColor = "#FF0000";
+
+            const binaari1 = document.getElementById("binaariLuvut1");
+            const binaari2 = document.getElementById("binaariLuvut2");
+            binaari1.style.color = "#FF0000";
+            binaari1.style.textShadow = "0 0 5px #FF0000";
+            binaari2.style.color = "#FF0000";
+            binaari2.style.textShadow = "0 0 5px #FF0000";
 
             const phaseElements = [phase1Ele, phase2Ele, phase3Ele, phase4Ele, phase5Ele];
             phaseElements.forEach(el => {
@@ -531,5 +562,6 @@ window.onload = () => {
         };
     };
 
+    // Kutsutaan funktioiden ketjua kaynnistys sekvenssiin
     kaynnistysSekvenssi();
 };
