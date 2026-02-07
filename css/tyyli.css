@@ -4,17 +4,14 @@ html, body {
     padding: 0;
     width: 100vw;
     height: 100vh;
-    /*min-height: 100.1dvh;*/
     background-color: #000;
     font-family: "Courier New", monospace;
-    /*-webkit-text-size-adjust: 100%;
-    overflow-x: hidden;*/
 }
 
 
 /* Silmän sijainti */
 .cyber-eye {
-    background: url(../images/kyborgin_silma_tausta.png);
+    background: url(../images/kaynnistys_taustakuva.png);
     position: relative;
     height: 100vh;
     width: auto;
@@ -29,6 +26,8 @@ html, body {
         eye-pulse 4s linear 23s infinite;
 }
 
+
+/* Layeri vaihtuville binääri numeroille */
 .data-layer {
     position: relative;
     color: #00FF9F;
@@ -46,7 +45,9 @@ html, body {
     white-space: nowrap;
     opacity: 0;
     transition: opacity 1s ease-in-out;
+    font-weight: bold;
 }
+
 
 /* Käynnistys sekvenssi kontti */
 #boot-screen {
@@ -59,6 +60,7 @@ html, body {
     display: flex;
     justify-content: center;
 }
+
 
 /* Käynnistys sekvenssi phaset oletuksena visibility hidden */
 #phase-1,
@@ -78,6 +80,7 @@ html, body {
     visibility: hidden;
 }
 
+
 /* Kellotus napin asetukset */
 #overclock-hint {
     position: absolute;
@@ -95,6 +98,7 @@ html, body {
     padding: 5px 10px;
     border-radius: 5px;
     animation: overclock-pulse 3s infinite;
+    text-align: center;
 }
 .ready-to-enter {
     border-color: #FFF;
@@ -103,12 +107,15 @@ html, body {
     box-shadow: 0 0 15px #00FF9F;
     font-weight: bold;
 }
+
+
 /* Jos kellotus nappia painettu niin vilkkumis animaatio pois */
 .overclock-active {
     animation: none !important;
 }
 
-/* Asetukset näkymälle käynnistys sekvenssin jälkeen */
+
+/* Asetukset päänäkymälle käynnistys sekvenssin jälkeen */
 #main-content {
     position: absolute;
     display: none;
@@ -119,17 +126,22 @@ html, body {
     visibility: hidden;
     z-index: 3;
 }
+
+
+/* Päänäkymän taustakuvan asetukset */
 .hud-taustakuva {
     width: auto;
     height: 100vh;
-    background: url(../images/taustakuva.png);
+    background: url(../images/jukka_palm.png);
     background-position: center;
     background-repeat: no-repeat;
     background-size: contain;
     animation: main-hud-flicker 4s linear;
     opacity: 1;
 }
-/* Navbarin asetukset */
+
+
+/* Headerin asetukset */
 .hud-header {
     position: fixed;
     top: 0;
@@ -159,8 +171,31 @@ html, body {
     opacity: 1;
 }
 .system-flicker {
-    animation: header-flicker 5s linear;
+    animation: header-flicker 6s linear;
 }
+
+
+/* Footerin asetukset */
+.footer-container {
+    position: fixed;
+    bottom: 5vh;
+    right: 5vw;
+    color: #00FF9F;
+    z-index: 4;
+    opacity: 0;
+    visibility: hidden;
+}
+.footer-info {
+    gap: 2px;
+}
+.footer-info .small {
+    font-size: clamp(0.5rem, 0.7vw, 0.75rem) !important;
+    font-family: 'Courier New', monospace;
+}
+#footer-tech {
+    margin-bottom: 2%;
+}
+
 
 @media screen and (max-width: 844px) and (orientation: landscape) {
     #phase-1,
@@ -194,21 +229,32 @@ html, body {
 
     }
 }
+@media screen and (max-width: 1024px) and (orientation: portrait) {
+    .hud-taustakuva {
+        background-size: cover;
+    }
+}
+
+
 /* Kellotus napin pulssaaminen */
 @keyframes overclock-pulse {
     0% { opacity: 0; }
     50% { opacity: 1; }
     100% { opacity: 0; }
 }
+
+
 /* Silmän pulssaaminen animaatio */
 @keyframes eye-pulse {
     0%, 100% { 
         opacity: 1; 
     }
     50% { 
-        opacity: 0.6; 
+        opacity: 0.4; 
     }
 }
+
+
 /* Silmän heräämis animaatio */
 @keyframes electrical-awakening {
     0% { opacity: 0; }
@@ -240,214 +286,47 @@ html, body {
 /* Pää näkymän flicker animaatio */
 @keyframes main-hud-flicker {
     0% { opacity: 0; }
-    1% { opacity: 1; }
-    2% { opacity: 0; }
-    3% { opacity: 1; }
     4% { opacity: 0; }
     5% { opacity: 1; }
-    12% { opacity: 0; }
-    15% { opacity: 1; }
-    35% { opacity: 0; }
-    55% { opacity: 1; }
-    75% { opacity: 0; }
-    100% { opacity: 1; }
+    6% {opacity: 0; }
+    7% { opacity: 1; }
+    8% { opacity: 0; }
+    9% { opacity: 1; }
+    10% { opacity: 1; }
+    11% { opacity: 0; }
+    12% { opacity: 1; }
+    25% { opacity: 1; }
+    27% { opacity: 1; }
+    28% { opacity: 0; }
+    32% { opacity: 0; }
+    33% { opacity: 1; }
+    46% { opacity: 1; }
+    47% { opacity: 0; }
+    50% { opacity: 0; }
+    51% { opacity: 1; }
+    100% {opacity: 1; }
 }
+
+/* Päänäkymän headerin flicker */
 @keyframes header-flicker {
     0% { opacity: 0; }
-    5% { opacity: 1; }
-    6% { opacity: 0; }
-    6.5% { opacity: 1; }
-    6.75% { opacity: 0; }
-    7% { opacity: 1; }
-    7.25% { opacity: 0; }
-    7.5% { opacity: 1; }
-    15% { opacity: 0; }
-    20%  { opacity: 1; }
-    20.25%  { opacity: 0; }
-    20.50%  { opacity: 1; }
-    20.75%  { opacity: 0; }
-    40%  { opacity: 1; }
-    40.25% { opacity: 0; }
-    40.50% { opacity: 1; }
-    40.75% { opacity: 0; }
-    41% { opacity: 1; }
-    41.25% { opacity: 0; }
-    50%  { opacity: 1; }
-    70%  { opacity: 0; }
-    80%  { opacity: 1; }
-    85% { opacity: 0; }
-    100% { opacity: 1; }
+    33% { opacity: 0; }
+    38% { opacity: 1; }
+    39% {opacity: 0; }
+    40% { opacity: 1; }
+    41% { opacity: 0; }
+    42% { opacity: 1; }
+    43% { opacity: 1; }
+    44% { opacity: 0; }
+    45% { opacity: 1; }
+    58% { opacity: 1; }
+    60% { opacity: 1; }
+    61% { opacity: 0; }
+    65% { opacity: 0; }
+    66% { opacity: 1; }
+    79% { opacity: 1; }
+    80% { opacity: 0; }
+    83% { opacity: 0; }
+    84% { opacity: 1; }
+    100% {opacity: 1; }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/*.hud-header.is-active {
-    opacity: 1;
-}
-.system-flicker {
-    animation: header-flicker 5s linear;
-}
-.header-center-title,
-.navbar-brand,
-.sivusto {
-    font-family: "Bruno Ace SC", sans-serif;
-    margin: 0;
-    color: #00FF9F;
-}
-.braille-container {
-    color: #00FF9F;
-    font-family: serif;
-    font-size: 1.2rem;
-    opacity: 0.6;
-    user-select: none;
-}
-.custom-burger {
-    border: none;
-    background: transparent;
-    display: flex;
-    color: #00FF9F;
-    gap: 4px;
-    padding: 5px;
-    flex-direction: column;
-    box-shadow: none !important;
-}
-.burger-bar {
-    display: block;
-    width: 22px;
-    height: 2px;
-    background-color: #00FF9F;
-    box-shadow: 0 0 5px #00FF9F;
-}
-.mobile-link {
-    color: #00FF9F;
-    font-family: "Bruno Ace SC", sans-serif;
-    text-decoration: none !important;
-    display: flex;
-    flex-direction: column;
-}
-.project-number {
-    font-weight: bold;
-}
-.project-tag {
-    border-bottom: 1px solid #00FF9F;
-}*/
-
-
-/* Asetukset näkymälle käynnistys sekvenssin jälkeen */
-/*#main-content {
-    position: fixed;
-    display: none;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    visibility: hidden;
-    z-index: 3;
-}
-.hud-taustakuva {
-    width: auto;
-    height: 100%;
-    background: url(../images/taustakuva.png);
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: contain;
-    animation: main-hud-flicker 4s linear;
-    opacity: 1;
-}*/
-
-
-
-/*.testi-sailio {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100%;
-    width: 100%;
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: 5;
-}
-.yksittainen-kortti {
-    width: 85%;
-    max-width: 400px;
-    height: auto;
-    min-height: 200px;
-    background: rgba(0, 255,159,0.1);
-    border: 2px solid #00FF9F;
-    padding: 20px;
-    color: #00FF9F;
-    overflow-y: auto;
-}
-.kortti-otsikko {
-    font-family: "Bruno Ace SC", sans-serif;
-    margin-bottom: 10px;
-}
-.kortti-viiva {
-    width: 90%;
-    height: 2px;
-    background-color: #00FF9F;
-    margin-bottom: 15px;
-    box-shadow: 0 0 5px #00FF9F;
-}
-.kortti-kuvaus {
-    font-family: "Courier New", monospace;
-    margin-bottom: 25px;
-}
-.kortti-media img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}*/
-
-
-/* Footerin asetukset */
-/*.footer-container {
-    position: fixed;
-    bottom: 5vh;
-    right: 5vw;
-    color: #00FF9F;
-    z-index: 4;
-    opacity: 0;
-    visibility: hidden;
-}
-.footer-info {
-    gap: 2px;
-}
-.footer-info .small {
-    font-size: clamp(0.5rem, 0.7vw, 0.75rem) !important;
-    font-family: 'Courier New', monospace;
-}
-#footer-tech {
-    margin-bottom: 2%;
-}*/
-
-
-
-
-
-
-
-
-
-
-
-
-
-
