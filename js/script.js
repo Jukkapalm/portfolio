@@ -634,5 +634,6 @@ window.onload = () => {
     };
 
     // Kutsutaan funktioiden ketjua kaynnistys sekvenssiin
-    kaynnistysSekvenssi();
+    //kaynnistysSekvenssi();
+    avaaMainHud();
 };
