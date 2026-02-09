@@ -486,57 +486,6 @@ function kaynnistaHudElementit() {
     const navbarBrand = document.querySelector(".navbar-brand");
     const sivusto = document.querySelector(".sivusto");
 
-    let currentRotation = 0;
-    const cylinder = document.getElementById("project-wheel");
-    const projectCount = 6;
-    const anglePerCard = 360 / projectCount;
-    let touchStartY = 0;
-    let touchEndY = 0;
-    let startRotation = currentRotation;
-
-    window.addEventListener("touchstart", (e) => {
-        touchStartY = e.touches[0].screenY;
-        startRotation = currentRotation;
-    }, { passive: false });
-
-    window.addEventListener("touchmove", (e) => {
-        e.preventDefault();
-        touchEndY = e.touches[0].screenY;
-
-        const deltaY = touchStartY - touchEndY;
-        const sensitivity = 1.5;
-        const temporaryRotation = startRotation + (deltaY * sensitivity);
-
-        cylinder.style.transform = `rotateX(${temporaryRotation}deg)`;
-    }, { passive: false });
-
-    window.addEventListener("touchend", () => {
-        const deltaY = touchStartY - touchEndY;
-        const treshold = 30;
-
-        if (Math.abs(deltaY) > treshold) {
-            if (deltaY > 0) {
-                currentRotation += anglePerCard;
-            } else {
-                currentRotation -= anglePerCard;
-            }
-        }
-        cylinder.style.transform = `rotateX(${currentRotation}deg)`;
-        upadateActiveCard();
-    }, false);
-
-
-    window.addEventListener("wheel", (event) => {
-        event.preventDefault();
-        if(event.deltaY > 0) {
-            currentRotation -= anglePerCard;
-        } else {
-            currentRotation += anglePerCard;
-        }
-        cylinder.style.transform = `rotateX(${currentRotation}deg)`;
-        upadateActiveCard();
-    }, { passive: false });
-
     if (header) {
         header.classList.add("is-active");
         title.classList.add("system-flicker");
@@ -551,24 +500,7 @@ function kaynnistaHudElementit() {
         footer.style.visibility = "visible";
         footer.style.transition = "opacity 1s ease-out";
     }
-
-    const cards = document.querySelectorAll(".card");
-
-    function upadateActiveCard() {
-        const activeIndex = Math.round(-currentRotation / anglePerCard) % projectCount;
-        const normalizedIndex = (activeIndex < 0) ? activeIndex + projectCount : activeIndex;
-
-        cards.forEach((card, index) => {
-            if (index === normalizedIndex) {
-                card.classList.add("active");
-            } else {
-                card.classList.remove("active");
-            }
-        })
-    }
-    upadateActiveCard();
 }
-
 
 
 // Päivitetään braille headerissa
@@ -634,6 +566,6 @@ window.onload = () => {
     };
 
     // Kutsutaan funktioiden ketjua kaynnistys sekvenssiin
-    //kaynnistysSekvenssi();
-    avaaMainHud();
+    kaynnistysSekvenssi();
+    //avaaMainHud();
 };
