@@ -519,6 +519,67 @@ function updateBraille() {
     setTimeout(updateBraille, Math.random() * 2000 + 500);
 }
 
+document.addEventListener("DOMContentLoaded", () => {
+    const unit01 = document.getElementById("unit-01");
+
+    unit01.addEventListener("click", function() {
+        if (this.classList.contains("extracted")) {
+            this.classList.add("sliding-out");
+
+            console.log("Kortti poistettu. avataan data-ikkuna...");
+            return;
+        }
+
+        if (this.classList.contains("decrypting")) return;
+        
+        this.classList.add("decrypting");
+        const statusText = this.querySelector(".status-text");
+        const actionText = this.querySelector(".unit-action");
+
+        let progress = 0;
+        const targetName = "WASTELAND_JOURNAL";
+
+        const interval = setInterval(() => {
+            progress += Math.floor(Math.random() * 5) + 2;
+
+            if (progress <= 100) {
+                statusText.innerText = `DECRYPTING...${progress}%`;
+                actionText.innerText = "> ACCESSING_DATA_STREAM";
+            } else {
+                clearInterval(interval);
+                finalizeDecryption(statusText, actionText, targetName, this);
+            }
+        }, 40);
+    });
+
+    function finalizeDecryption(element, actionElement, finalName, card) {
+        const chars = "⠁⠂⠃⠄⡀⡁⡂⡃⡄⢀⢁⢂⢃⢄⣀⣁⣂⣃⠃⠗⠁⠊⠇⠵⠴⠷⠦";
+        let iteration = 0;
+
+        const scrambleInterval = setInterval(() => {
+            const scrabmledPart = finalName
+                .split("")
+                .map((_, index) => {
+                    if (index < iteration) return finalName[index];
+                    return chars[Math.floor(Math.random() * chars.length)];
+                })
+                .join("");
+
+            element.innerText = `Project: ${scrabmledPart}`;
+                
+            if (iteration >= finalName.length) {
+                clearInterval(scrambleInterval);
+                element.style.color = "#FFF";
+                actionElement.innerText = "> EXTRACT_UNIT";
+                actionElement.style.color = "#FFAE00";
+                card.classList.remove("decrypting");
+                card.classList.add("extracted");
+            }
+            iteration += 1 / 3;
+        }, 30);
+    }
+});
+
 
 // Tapahtuma ketju sivuun latauksen yhteydessä
 window.onload = () => {
