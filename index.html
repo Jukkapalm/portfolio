@@ -69,6 +69,41 @@
 
         <main id="main-content">
             <div class="hud-taustakuva"></div>
+
+            <div class="container-fluid h-100 d-flex align-items-center">
+                <div class="row w-100 px-lg-5">
+                    <div class="col-12 col-md-6 col-lg-4">
+                        <div class="server-rack">
+                            <div class="unit-card-container">
+                                <div class="unit-placeholder">
+                                    <div class="placeholder-label">UNIT_EXTRACTED</div>
+                                </div>
+
+                                <div class="unit-card status-encrypted" id="unit-01">
+                                    <div class="unit-led"></div>
+                                    <div class="unit-content">
+                                        <div class="unit-header">UNIT_ID: 0x01</div>
+                                        <div class="unit-status"><span class="status-text">STATUS: ENCRYPTED</span></div>
+                                        <div class="unit-action">> RUN_DECRYPTION_PROT</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="unit-card-container">
+                                <div class="unit-placeholder">
+                                    <div class="placeholder-label">UNIT_LOCKED</div>
+                                </div>
+                                <div class="unit-card unit-locked" id="unit-02">
+                                    <div class="unit-content">
+                                        <div class="unit-header">UNIT_ID: 0x02</div>
+                                        <div class="unit-status" style="color: #ff4444;">STATUS: LOCKED</div>
+                                        <div class="unit-action" style="color: #ff4444;">> ACCESS_DENIED</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </main>
 
         <footer class="footer-container">
