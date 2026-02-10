@@ -520,7 +520,6 @@ function updateBraille() {
 }
 
 
-
 // Tapahtuma ketju sivuun latauksen yhteydessä
 window.onload = () => {
 
@@ -566,6 +565,6 @@ window.onload = () => {
     };
 
     // Kutsutaan funktioiden ketjua kaynnistys sekvenssiin
-    kaynnistysSekvenssi();
-    //avaaMainHud();
+    //kaynnistysSekvenssi();
+    avaaMainHud();
 };
