@@ -97,6 +97,7 @@ function tulostaTxt4() {
         setTimeout(prosenttiLataus, 200);
     }
 }
+// Prosenttilataus laskuri
 function prosenttiLataus() {
     if (latausProsentti <= 100) {
         phase1Ele.innerHTML = pohjaTeksti + ' ' + latausProsentti + '%';
@@ -113,6 +114,7 @@ function prosenttiLataus() {
         }, statusViive);
     }
 }
+// Käynnistys sekvenssin phase vaihto
 function siirryPhase2() {
     phase1Ele.style.display = "none";
     phase2Ele.style.visibility = "visible";
@@ -184,6 +186,7 @@ function msLataus() {
         }, statusViive);
     }
 }
+// Jälleen phase vaihto
 function siirryPhase3() {
     phase2Ele.style.display = "none";
     phase3Ele.style.visibility = "visible";
@@ -255,6 +258,7 @@ function prosenttiLataus2() {
         }, statusViive);
     }
 }
+// Phase vaihto
 function siirryPhase4() {
     phase3Ele.style.display = "none";
     phase4Ele.style.visibility = "visible";
@@ -326,6 +330,7 @@ function prosenttiLataus3() {
         }, statusViive);
     }
 }
+// Phase vaihto
 function siirryPhase5() {
     phase4Ele.style.display = "none";
     phase5Ele.style.visibility = "visible";
@@ -430,7 +435,11 @@ function enterReady() {
         overclockBtn.classList.add("ready-to-enter");
 
         overclockBtn.onclick = () => {
-            overclockBtn.style.backgroundColor = "#00FF9F";
+            if (overclockBtn.classList.contains("overclock-active")) {
+                overclockBtn.style.backgroundColor = "#FF0000";
+            } else {
+                overclockBtn.style.backgroundColor = "#00FF9F";
+            }
             overclockBtn.style.color = "#000";
             avaaMainHud();
         }
@@ -449,6 +458,7 @@ function avaaMainHud() {
     cyberEye.style.animation = "none";
     cyberEye.style.opacity = "1";
 
+    // Häivytetään latausruutu ja taustakuvat pois
     setTimeout(() => {
         const fadeOut = "opacity 1.5s ease-out";
         bootScreen.style.transition = fadeOut;
@@ -461,6 +471,7 @@ function avaaMainHud() {
     }, 50);
 
 
+    // Tuodaan varsinainen päänäkymä näkyviin
     setTimeout(() => {
         bootScreen.style.display = "none";
         cyberEye.style.display = "none";
@@ -519,6 +530,45 @@ function updateBraille() {
     setTimeout(updateBraille, Math.random() * 2000 + 500);
 }
 
+
+
+// Projektikorttien data
+const projectData = {
+    "unit-01": {
+        name: "WASTELAND_JOURNAL",
+        desc: "Fiktiivinen blogi post-apokalyptisessä kaaoottisessa maailmassa jossa valuutta ja ruoka ovat tiukilla. Jotta blogia voi käyttää, se tarvitsee käyttäjältä toimintoja bunkkerin virran ja lämmityksen hallintaan.",
+        tech: "HTML / CSS / JAVASCRIPT / BOOSTRAP",
+        img: "images/kaynnistys_taustakuva.png",
+        repo: "#",
+        demo: "#"
+    }
+};
+window.openProjectWindow = function(id) {
+    const data = projectData[id];
+    if (!data) return;
+
+    document.getElementById("display-name").innerText = data.name;
+    document.getElementById("display-desc").innerText = data.desc;
+    document.getElementById("display-tech").innerText = data.tech;
+    document.getElementById("display-img").src = data.img;
+    document.getElementById("repo-link").href = data.repo;
+    document.getElementById("demo-link").href = data.demo;
+
+    const win = document.getElementById("project-display");
+    win.style.display = "block";
+    setTimeout(() => win.classList.add("active"), 10);
+};
+window.closeProject = function() {
+    const win = document.getElementById("project-display");
+    win.classList.remove("active");
+    const card = document.querySelector(".unit-card.sliding-out");
+    if (card) {
+        setTimeout(() => {
+            card.classList.remove("sliding-out");
+            win.style.display = "none";
+        }, 400);
+    }
+};
 document.addEventListener("DOMContentLoaded", () => {
     const unit01 = document.getElementById("unit-01");
 
@@ -526,7 +576,9 @@ document.addEventListener("DOMContentLoaded", () => {
         if (this.classList.contains("extracted")) {
             this.classList.add("sliding-out");
 
-            console.log("Kortti poistettu. avataan data-ikkuna...");
+            setTimeout(() => {
+                window.openProjectWindow("unit-01");
+            }, 800);
             return;
         }
 
@@ -552,6 +604,9 @@ document.addEventListener("DOMContentLoaded", () => {
         }, 40);
     });
 
+
+
+    // Projektiekorttien salauksen purku ja scramble efekti
     function finalizeDecryption(element, actionElement, finalName, card) {
         const chars = "⠁⠂⠃⠄⡀⡁⡂⡃⡄⢀⢁⢂⢃⢄⣀⣁⣂⣃⠃⠗⠁⠊⠇⠵⠴⠷⠦";
         let iteration = 0;
@@ -581,6 +636,7 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 
+
 // Tapahtuma ketju sivuun latauksen yhteydessä
 window.onload = () => {
 
@@ -602,6 +658,7 @@ window.onload = () => {
             overclockBtn.innerText = "SYSTEM_OVERCLOCKED";
             overclockBtn.style.color = "#FF0000";
             overclockBtn.style.borderColor = "#FF0000";
+            overclockBtn.style.boxShadow = "0 0 15px #FF0000";
 
             const binaari1 = document.getElementById("binaariLuvut1");
             const binaari2 = document.getElementById("binaariLuvut2");
@@ -626,6 +683,5 @@ window.onload = () => {
     };
 
     // Kutsutaan funktioiden ketjua kaynnistys sekvenssiin
-    //kaynnistysSekvenssi();
-    avaaMainHud();
+    kaynnistysSekvenssi();
 };
