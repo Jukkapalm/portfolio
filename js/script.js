@@ -681,6 +681,12 @@ window.onload = () => {
             }
         };
     };
+    
+    //PÄIVITETÄÄN NYKYINEN VUOSI FOOTERIIN
+    const yearSpan = document.getElementById("current-year");
+    if (yearSpan) {
+        yearSpan.textContent = new Date().getFullYear();
+    }
 
     // Kutsutaan funktioiden ketjua kaynnistys sekvenssiin
     kaynnistysSekvenssi();
