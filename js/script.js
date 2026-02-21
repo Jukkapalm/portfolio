@@ -538,7 +538,7 @@ const projectData = {
         name: "WASTELAND_JOURNAL",
         desc: "Fiktiivinen blogi post-apokalyptisessä maailmassa, jossa kaaos hallitsee. Valuutta ja ruoka ovat tiukilla. Jotta blogia voi käyttää, se tarvitsee käyttäjältä toimia bunkkerin virran ja lämmityksen hallintaan.",
         tech: "HTML / CSS / JAVASCRIPT / PHP / MYSQL / BOOSTRAP",
-        img: "images/kaynnistys_taustakuva.png",
+        img: "images/bunker-terminal.png",
         repo: "https://github.com/Jukkapalm/wasteland-journal",
         demo: "#"
     }
