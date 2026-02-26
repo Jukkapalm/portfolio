@@ -468,7 +468,7 @@ const projectData = {
         tech: "HTML / CSS / JAVASCRIPT / PHP / MYSQL / BOOSTRAP",
         img: "images/bunker-terminal.png",
         repo: "https://github.com/Jukkapalm/wasteland-journal",
-        demo: "#"
+        demo: "https://jukkapekka.com/portfolio/wasteland-journal"
     }
 };
 window.openProjectWindow = function(id) {
