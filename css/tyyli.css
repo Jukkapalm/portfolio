@@ -9,49 +9,6 @@ html, body {
 }
 
 
-
-/* Silmän sijainti, heräämisanimaatio ja pulssaaminen */
-.cyber-eye {
-    /*background: url(../images/kaynnistys_taustakuva.png);*/
-    position: relative;
-    height: 100vh;
-    width: auto;
-    top: 0;
-    left: 0;
-    opacity: 0;
-    /*background-repeat: no-repeat;
-    background-position: center;
-    background-size: cover;*/
-    animation: 
-        electrical-awakening 23s linear forwards,
-        eye-pulse 4s linear 23s infinite;
-}
-
-
-
-/* Layeri vaihtuville binääri numeroille */
-.data-layer {
-    position: relative;
-    color: #00FF9F;
-    margin-top: -100vh; /* Tämä nostaa binäärit elementin taustakuvan päälle */
-    width: 100vw;
-    height: 35vh;
-    z-index: 2;
-    font-size: clamp(0.9rem, 1vw + 0.5rem, 1.3rem);
-    font-family: "Courier New", monospace;
-    overflow: hidden;
-}
-#binaariLuvut1,
-#binaariLuvut2 {
-    position: absolute;
-    white-space: nowrap;
-    opacity: 0;
-    transition: opacity 1s ease-in-out;
-    font-weight: bold;
-}
-
-
-
 /* Käynnistys sekvenssi kontti */
 #boot-screen {
     position: relative;
@@ -59,11 +16,9 @@ html, body {
     left: 0;
     width: 100vw;
     height: 100vh;
-    margin-top: -100vh;
     display: flex;
     justify-content: center;
 }
-
 
 
 /* Käynnistys sekvenssi phaset oletuksena visibility hidden
@@ -84,7 +39,6 @@ JavaScipt tuo esiin yksitellen */
     padding-left: 15px;
     visibility: hidden;
 }
-
 
 
 /* Kellotus napin asetukset */
@@ -118,7 +72,6 @@ napin tyylejä kun sivu jää odottamaan käyttäjän painamista josta jatketaan
 }
 
 
-
 /* Asetukset päänäkymälle käynnistys sekvenssin jälkeen */
 #main-content {
     position: fixed;
@@ -129,30 +82,13 @@ napin tyylejä kun sivu jää odottamaan käyttäjän painamista josta jatketaan
     height: 100%;
     visibility: hidden;
     z-index: 10;
-    /*background: #000 url(../images/jukka_palm.png) no-repeat center center fixed;*/
-    /*background-size: contain;*/
     overflow-y: auto;
     -webkit-overflow-scrolling: touch;
     touch-action: pan-y;
-    animation: main-hud-flicker 4s linear;
+    opacity: 0;
+    transition: opacity 0.8s ease-in;
+    /*animation: main-hud-flicker 4s linear;*/
 }
-#main-content::after {
-    content: '';
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: radial-gradient(
-        ellipse at center,
-        transparent 20%,
-        rgba(0,0,0,0.7) 45%,
-        rgba(0,0,0,1) 70%
-    );
-    pointer-events: none;
-    z-index: 1;
-}
-
 
 
 /* Headerin asetukset teksteineen ja symbolilohkoineen */
@@ -190,7 +126,6 @@ napin tyylejä kun sivu jää odottamaan käyttäjän painamista josta jatketaan
 }
 
 
-
 /* "SERVERI RÄKKI" ASETUKSET */
 .server-rack {
     position: relative;
@@ -214,7 +149,6 @@ napin tyylejä kun sivu jää odottamaan käyttäjän painamista josta jatketaan
 .server-rack::-webkit-scrollbar {
     display: none;
 }
-
 
 
 /* Yksittäinen projektikortti */
@@ -278,7 +212,10 @@ napin tyylejä kun sivu jää odottamaan käyttäjän painamista josta jatketaan
     border-color: #00FF9F;
     z-index: 2;
 }
-
+.unit-locked .unit-status,
+.unit-locked .unit-action {
+    color: #FF4444;
+}
 
 
 /* Animaatio projektikortin ulosvedolle */
@@ -288,7 +225,6 @@ napin tyylejä kun sivu jää odottamaan käyttäjän painamista josta jatketaan
     transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.5s ease;
     pointer-events: none;
 }
-
 
 
 /* Projektikortin "tyhjä" slotti */
@@ -319,7 +255,6 @@ napin tyylejä kun sivu jää odottamaan käyttäjän painamista josta jatketaan
     position: relative;
     margin-bottom: 15px;
 }
-
 
 
 /* Projektin tiedot näyttävä popup ikkuna */
@@ -422,7 +357,6 @@ napin tyylejä kun sivu jää odottamaan käyttäjän painamista josta jatketaan
 }
 
 
-
 /* Footerin asetukset */
 .footer-container {
     position: fixed;
@@ -445,7 +379,6 @@ napin tyylejä kun sivu jää odottamaan käyttäjän painamista josta jatketaan
 }
 
 
-
 /* Käynnistys sekvenssin asetukset mobiiliin landscape */
 @media screen and (max-width: 844px) and (orientation: landscape) {
     #phase-1,
@@ -459,7 +392,6 @@ napin tyylejä kun sivu jää odottamaan käyttäjän painamista josta jatketaan
         right: 4vw;
     }
 }
-
 
 
 /* Käynnistys sekvenssin asetukset mobiiliin portrait */
@@ -484,16 +416,6 @@ napin tyylejä kun sivu jää odottamaan käyttäjän painamista josta jatketaan
 }
 
 
-
-/* Tässä vaihdetaan taustakuva cover jotta näkyy koko ruudun kokoisena */
-@media screen and (max-width: 1024px) and (orientation: portrait) {
-    #main-content {
-        background-size: cover;
-    }
-}
-
-
-
 /* Projekti popup ikkunan koko mobiilissa ja linkit/buttonit asetukset */
 @media screen and (max-width: 768px) {
     .project-window {
@@ -514,12 +436,10 @@ napin tyylejä kun sivu jää odottamaan käyttäjän painamista josta jatketaan
 }
 
 
-
 /* Projekti ikkunan ja projektikuvan koko landscapessa mobiilissa */
 @media screen and (orientation: landscape) and (max-height: 500px) {
     .project-window {
         width: 70vw;
-        max-height: 80vh;
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%) scale(1);
@@ -535,7 +455,6 @@ napin tyylejä kun sivu jää odottamaan käyttäjän painamista josta jatketaan
 }
 
 
-
 /* Kellotus napin pulssaaminen */
 @keyframes overclock-pulse {
     0% { opacity: 0; }
@@ -544,51 +463,8 @@ napin tyylejä kun sivu jää odottamaan käyttäjän painamista josta jatketaan
 }
 
 
-
-/* Silmän pulssaaminen animaatio */
-@keyframes eye-pulse {
-    0%, 100% { 
-        opacity: 1; 
-    }
-    50% { 
-        opacity: 0.4; 
-    }
-}
-
-
-
-/* Silmän heräämis animaatio */
-@keyframes electrical-awakening {
-    0% { opacity: 0; }
-    5% { opacity: 0.2; }
-    6% { opacity: 0; }
-    6.5% { opacity: 1; }
-    6.75% { opacity: 0; }
-    7% { opacity: 1; }
-    7.25% { opacity: 0; }
-    7.5% { opacity: 1; }
-    15% { opacity: 0.6; }
-    20%  { opacity: 0.3; }
-    20.25%  { opacity: 1; }
-    20.50%  { opacity: 0; }
-    20.75%  { opacity: 1; }
-    40%  { opacity: 0.3; }
-    40.25% { opacity: 1; }
-    40.50% { opacity: 0; }
-    40.75% { opacity: 1; }
-    41% { opacity: 0; }
-    41.25% { opacity: 1; }
-    50%  { opacity: 0.2; }
-    70%  { opacity: 0.7; }
-    80%  { opacity: 0.4; }
-    85% { opacity: 1; }
-    100% { opacity: 1; }
-}
-
-
-
 /* Pää näkymän flicker animaatio */
-@keyframes main-hud-flicker {
+/*@keyframes main-hud-flicker {
     0% { opacity: 0; }
     24% { opacity: 0; }
     25% { opacity: 1; }
@@ -605,8 +481,7 @@ napin tyylejä kun sivu jää odottamaan käyttäjän painamista josta jatketaan
     36% { opacity: 0; }
     37% { opacity: 1; }
     100% { opacity: 1; }
-}
-
+}*/
 
 
 /* Päänäkymän headerin flicker */
@@ -630,7 +505,6 @@ napin tyylejä kun sivu jää odottamaan käyttäjän painamista josta jatketaan
 }
 
 
-
 /* Server-rack flicker */
 @keyframes rack-flicker {
     0% { opacity: 0; }
@@ -652,7 +526,6 @@ napin tyylejä kun sivu jää odottamaan käyttäjän painamista josta jatketaan
 }
 
 
-
 /* Projekti kortin connection tekstin vilkkuminen */
 @keyframes connection-flicker {
     0%, 100% { 
@@ -662,7 +535,6 @@ napin tyylejä kun sivu jää odottamaan käyttäjän painamista josta jatketaan
         opacity: 0; 
     }
 }
-
 
 
 /* Projektikortin kuva scannausviiva animaatio */
