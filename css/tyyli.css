@@ -12,16 +12,16 @@ html, body {
 
 /* Silmän sijainti, heräämisanimaatio ja pulssaaminen */
 .cyber-eye {
-    background: url(../images/kaynnistys_taustakuva.png);
+    /*background: url(../images/kaynnistys_taustakuva.png);*/
     position: relative;
     height: 100vh;
     width: auto;
     top: 0;
     left: 0;
     opacity: 0;
-    background-repeat: no-repeat;
+    /*background-repeat: no-repeat;
     background-position: center;
-    background-size: cover;
+    background-size: cover;*/
     animation: 
         electrical-awakening 23s linear forwards,
         eye-pulse 4s linear 23s infinite;
@@ -129,12 +129,28 @@ napin tyylejä kun sivu jää odottamaan käyttäjän painamista josta jatketaan
     height: 100%;
     visibility: hidden;
     z-index: 10;
-    background: url(../images/jukka_palm.png) no-repeat center center fixed;
-    background-size: contain;
+    /*background: #000 url(../images/jukka_palm.png) no-repeat center center fixed;*/
+    /*background-size: contain;*/
     overflow-y: auto;
     -webkit-overflow-scrolling: touch;
     touch-action: pan-y;
     animation: main-hud-flicker 4s linear;
+}
+#main-content::after {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(
+        ellipse at center,
+        transparent 20%,
+        rgba(0,0,0,0.7) 45%,
+        rgba(0,0,0,1) 70%
+    );
+    pointer-events: none;
+    z-index: 1;
 }
 
 
