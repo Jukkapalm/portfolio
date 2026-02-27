@@ -1,34 +1,40 @@
 // Globaalit muuttujat
 let i = 0; // Seuraa indeksiä teksteissä
 let latausProsentti = 0;  // Seuraa indeksiä latausprosenteissa
-let prosenttiSpeed = 20;
-let kirjoitusNopeus = 28;
 let pohjaTeksti = "";  // Tilapäinen muuttuja johon tallennetaan meneillään olevan phasen tekstit
-let riviViive = 300;
-let vaiheViive = 1000;
-let statusViive = 1000;
+const prosenttiSpeed = 15;
+const kirjoitusNopeus = 15;
+const riviViive = 150;
+const vaiheViive = 1000;
+const statusViive = 150;
 
 
 // Tekstit tarkistuksiin jotka käynnistys sekvenssissä suoritetaan
-const txt1 = "> INITIALIZING_FUSION_CELL...";
-const txt2 = "> VOLTAGE_STABLE: 1.21GW";
-const txt3 = "> COOLANT_FLOW: OPTIMAL";
-const txt4 = "> HARDWARE_INTEGRITY:";
-const txt5 = "> CONNECTING_CORTEX...";
-const txt6 = "> CPU_CORES: 256_ACTIVE";
-const txt7 = "> SYNAPTIC_LINKS: ESTABLISHED";
-const txt8 = "> NEURAL_LATENCY:";
-const txt9 = "> OPTIC_SENSORS: CALIBRATING...";
-const txt10 = "> THERMAL_VISION: ONLINE";
-const txt11 = "> AUDITORY_BUFFERS: CLEARED";
-const txt12 = "> ENVIRONMENT_MAPPING:";
-const txt13 = "> DETECTING_EXTERNAL_SIGNAL...";
-const txt14 = "> ENCRYPTED_DATA_STREAM_FOUND";
-const txt15 = "> ATTEMPTING_DECRYPTION...";
-const txt16 = "> DECRYPTION_PROGRESS:";
-const txt17 = "> LOADING_PERSONALITY_MATRIX...";
-const txt18 = "> MEMORY_RECALL: ACTIVE";
-const txt19 = "> SYSTEM_STABILITY:"
+
+// Phase 1 - Laitteisto & Infrastruktuuri
+const txt1 = "> CLUSTER_INIT: SCANNING_NODES...";
+const txt2 = "> GPU_MATRIX: 512_CORES_DETECTED";
+const txt3 = "> MEMORY_ALLOC:";
+
+// Phase 2 - Mallin lataus
+const txt4 = "> FETCHING_MODEL_WEIGHTS...";
+const txt5 = "> PARAMETERS_LOADED: 175B";
+const txt6 = "> CONTEXT_WINDOW:";
+
+// Phase 3 - Neuroverkon rakentaminen
+const txt7 = "> MAPPING_SYNAPTIC_TOPOLOGY...";
+const txt8 = "> NODE_CONNECTIONS: ESTABLISHING";
+const txt9 = "> GRAPH_DENSITY:";
+
+// Phase 4 - Kalibrointi
+const txt10 = "> RUNNING_ALIGNMENT_PROTOCOLS...";
+const txt11 = "> BIAS_FILTER: ENGAGED";
+const txt12 = "> COHERENCE_SCORE:";
+
+// Phase 5 - Herätys
+const txt13 = "> LOADING_CONSCIOUSNESS_LAYER...";
+const txt14 = "> IDENTITY_MATRIX: VERIFIED";
+const txt15 = "> INFERENCE_ENGINE:";
 
 
 // Haetaan elementti id:n perusteella
@@ -43,9 +49,7 @@ const phase5Ele = document.getElementById("phase-5");
 function kaynnistysSekvenssi() {
     phase1Ele.style.visibility = "visible";
 
-    if (i === 0) {
-        phase1Ele.innerHTML += "<br><br>";
-    }
+    if (i === 0) { phase1Ele.innerHTML += "<br><br>"; }
 
     if (i < txt1.length) {
         phase1Ele.innerHTML += txt1.charAt(i);
@@ -74,34 +78,22 @@ function tulostaTxt3() {
         i++;
         setTimeout(tulostaTxt3, kirjoitusNopeus);
     } else {
-        i = 0;
-        phase1Ele.innerHTML += "<br>";
-        setTimeout(tulostaTxt4, riviViive);
-    }
-}
-function tulostaTxt4() {
-    if (i < txt4.length) {
-        phase1Ele.innerHTML += txt4.charAt(i);
-        i++;
-        setTimeout(tulostaTxt4, kirjoitusNopeus);
-    }
-    else {
         pohjaTeksti = phase1Ele.innerHTML;
-        setTimeout(prosenttiLataus, 200);
+        setTimeout(prosenttiLataus1, 200);
     }
 }
-// Prosenttilataus laskuri
-function prosenttiLataus() {
+// Prosenttilataus — Phase 1
+function prosenttiLataus1() {
     if (latausProsentti <= 100) {
         phase1Ele.innerHTML = pohjaTeksti + ' ' + latausProsentti + '%';
         latausProsentti++;
-        setTimeout(prosenttiLataus, prosenttiSpeed);
+        setTimeout(prosenttiLataus1, prosenttiSpeed);
     } else {
-        setTimeout(function() {
+        setTimeout(() => {
             latausProsentti = 0;
             i = 0;
             pohjaTeksti = "";
-            phase1Ele.innerHTML += "<br><b>> POWER_CORE: ONLINE</b>";
+            phase1Ele.innerHTML += "<br><b>> INFRASTRUCTURE: ONLINE</b>";
             setTimeout(siirryPhase2, vaiheViive);
         }, statusViive);
     }
@@ -111,14 +103,23 @@ function siirryPhase2() {
     phase1Ele.style.display = "none";
     phase2Ele.style.visibility = "visible";
 
-    if (i === 0) {
-        phase2Ele.innerHTML += "<br><br>";
-    }
+    if (i === 0) { phase2Ele.innerHTML += "<br><br>"; }
 
+    if (i < txt4.length) {
+        phase2Ele.innerHTML += txt4.charAt(i);
+        i++;
+        setTimeout(siirryPhase2, kirjoitusNopeus);
+    } else {
+        i = 0;
+        phase2Ele.innerHTML += "<br>";
+        setTimeout(tulostaTxt5, riviViive);
+    }
+}
+function tulostaTxt5() {
     if (i < txt5.length) {
         phase2Ele.innerHTML += txt5.charAt(i);
         i++;
-        setTimeout(siirryPhase2, kirjoitusNopeus);
+        setTimeout(tulostaTxt5, kirjoitusNopeus);
     } else {
         i = 0;
         phase2Ele.innerHTML += "<br>";
@@ -131,289 +132,245 @@ function tulostaTxt6() {
         i++;
         setTimeout(tulostaTxt6, kirjoitusNopeus);
     } else {
-        i = 0;
-        phase2Ele.innerHTML += "<br>";
-        setTimeout(tulostaTxt7, riviViive);
-    }
-}
-function tulostaTxt7() {
-    if (i < txt7.length) {
-        phase2Ele.innerHTML += txt7.charAt(i);
-        i++;
-        setTimeout(tulostaTxt7, kirjoitusNopeus);
-    } else {
-        i = 0;
-        phase2Ele.innerHTML += "<br>";
-        setTimeout(tulostaTxt8, riviViive);
-    }
-}
-function tulostaTxt8() {
-    if (i < txt8.length) {
-        phase2Ele.innerHTML += txt8.charAt(i);
-        i++;
-        setTimeout(tulostaTxt8, kirjoitusNopeus);
-    } else {
         pohjaTeksti = phase2Ele.innerHTML;
-        setTimeout(msLataus, 200);
+        setTimeout(prosenttiLataus2, 200);
     }
 }
-function msLataus() {
+// Prosenttilataus — Phase 2
+function prosenttiLataus2() {
     if (latausProsentti <= 100) {
-        let msArvo = (100 - (latausProsentti * 0.99)).toFixed(1) + "ms";
-        phase2Ele.innerHTML = pohjaTeksti + ' ' + msArvo;
+        phase2Ele.innerHTML = pohjaTeksti + ' ' + latausProsentti + '%';
         latausProsentti++;
-        setTimeout(msLataus, prosenttiSpeed);
+        setTimeout(prosenttiLataus2, prosenttiSpeed);
     } else {
-        setTimeout(function() {
+        setTimeout(() => {
             latausProsentti = 0;
             i = 0;
             pohjaTeksti = "";
-            phase2Ele.innerHTML += "<br><b>> NEURAL_LINK: STABLE</b>";
+            phase2Ele.innerHTML += "<br><b>> MODEL: READY</b>";
             setTimeout(siirryPhase3, vaiheViive);
         }, statusViive);
     }
 }
-// Jälleen phase vaihto
 function siirryPhase3() {
     phase2Ele.style.display = "none";
     phase3Ele.style.visibility = "visible";
 
-    if (i === 0) {
-        phase3Ele.innerHTML += "<br><br>";
-    }
+    if (i === 0) phase3Ele.innerHTML += "<br><br>";
 
-    if (i < txt9.length) {
-        phase3Ele.innerHTML += txt9.charAt(i);
+    if (i < txt7.length) {
+        phase3Ele.innerHTML += txt7.charAt(i);
         i++;
         setTimeout(siirryPhase3, kirjoitusNopeus);
     } else {
         i = 0;
         phase3Ele.innerHTML += "<br>";
-        setTimeout(tulostaTxt10, riviViive);
+        setTimeout(tulostaTxt8, riviViive);
     }
 }
-function tulostaTxt10() {
-    if (i < txt10.length) {
-        phase3Ele.innerHTML += txt10.charAt(i);
+function tulostaTxt8() {
+    if (i < txt8.length) {
+        phase3Ele.innerHTML += txt8.charAt(i);
         i++;
-        setTimeout(tulostaTxt10, kirjoitusNopeus);
+        setTimeout(tulostaTxt8, kirjoitusNopeus);
     } else {
         i = 0;
         phase3Ele.innerHTML += "<br>";
-        setTimeout(tulostaTxt11, riviViive);
+        setTimeout(tulostaTxt9, riviViive);
     }
 }
-function tulostaTxt11() {
-    if (i < txt11.length) {
-        phase3Ele.innerHTML += txt11.charAt(i);
+function tulostaTxt9() {
+    if (i < txt9.length) {
+        phase3Ele.innerHTML += txt9.charAt(i);
         i++;
-        setTimeout(tulostaTxt11, kirjoitusNopeus);
-    } else {
-        i = 0;
-        phase3Ele.innerHTML += "<br>";
-        setTimeout(tulostaTxt12, riviViive);
-    }
-}
-function tulostaTxt12() {
-    if (i < txt12.length) {
-        phase3Ele.innerHTML += txt12.charAt(i);
-        i++;
-        setTimeout(tulostaTxt12, kirjoitusNopeus);
+        setTimeout(tulostaTxt9, kirjoitusNopeus);
     } else {
         pohjaTeksti = phase3Ele.innerHTML;
-        i = 0;
-        setTimeout(prosenttiLataus2, riviViive);
+        setTimeout(prosenttiLataus3, 200);
     }
 }
-function prosenttiLataus2() {
+// Prosenttilataus — Phase 3
+function prosenttiLataus3() {
     if (latausProsentti <= 100) {
         phase3Ele.innerHTML = pohjaTeksti + ' ' + latausProsentti + '%';
         latausProsentti++;
-        setTimeout(prosenttiLataus2, prosenttiSpeed);
+        setTimeout(prosenttiLataus3, prosenttiSpeed);
     } else {
-        setTimeout(function() {
+        setTimeout(() => {
             latausProsentti = 0;
             i = 0;
             pohjaTeksti = "";
-            phase3Ele.innerHTML += "<br><b>> SENSORS: ACTIVE</b>";
+            phase3Ele.innerHTML += "<br><b>> NETWORK: STABLE</b>";
             setTimeout(siirryPhase4, vaiheViive);
         }, statusViive);
     }
 }
-// Phase vaihto
+// Jälleen phase vaihto
 function siirryPhase4() {
     phase3Ele.style.display = "none";
     phase4Ele.style.visibility = "visible";
 
-    if (i === 0) {
-        phase4Ele.innerHTML += "<br><br>";
-    }
+    if (i === 0) { phase4Ele.innerHTML += "<br><br>"; }
 
-    if (i < txt13.length) {
-        phase4Ele.innerHTML += txt13.charAt(i);
+    if (i < txt10.length) {
+        phase4Ele.innerHTML += txt10.charAt(i);
         i++;
         setTimeout(siirryPhase4, kirjoitusNopeus);
     } else {
         i = 0;
         phase4Ele.innerHTML += "<br>";
-        setTimeout(tulostaTxt14, riviViive);
+        setTimeout(tulostaTxt11, riviViive);
     }
 }
-function tulostaTxt14() {
-    if (i < txt14.length) {
-        phase4Ele.innerHTML += txt14.charAt(i);
+function tulostaTxt11() {
+    if (i < txt11.length) {
+        phase4Ele.innerHTML += txt11.charAt(i);
         i++;
-        setTimeout(tulostaTxt14, kirjoitusNopeus);
+        setTimeout(tulostaTxt11, kirjoitusNopeus);
     } else {
         i = 0;
         phase4Ele.innerHTML += "<br>";
-        setTimeout(tulostaTxt15, riviViive);
+        setTimeout(tulostaTxt12, riviViive);
     }
 }
-function tulostaTxt15() {
-    if (i < txt15.length) {
-        phase4Ele.innerHTML += txt15.charAt(i);
+function tulostaTxt12() {
+    if (i < txt12.length) {
+        phase4Ele.innerHTML += txt12.charAt(i);
         i++;
-        setTimeout(tulostaTxt15, kirjoitusNopeus);
-    } else {
-        i = 0;
-        phase4Ele.innerHTML += "<br>";
-        setTimeout(tulostaTxt16, riviViive);
-    }
-}
-function tulostaTxt16() {
-    if (i < txt16.length) {
-        phase4Ele.innerHTML += txt16.charAt(i);
-        i++;
-        setTimeout(tulostaTxt16, kirjoitusNopeus);
+        setTimeout(tulostaTxt12, kirjoitusNopeus);
     } else {
         pohjaTeksti = phase4Ele.innerHTML;
-        i = 0;
-        setTimeout(prosenttiLataus3, riviViive);
+        setTimeout(prosenttiLataus4, 200);
     }
 }
-function prosenttiLataus3() {
+// Prosenttilataus — Phase 4
+function prosenttiLataus4() {
     if (latausProsentti <= 100) {
         phase4Ele.innerHTML = pohjaTeksti + ' ' + latausProsentti + '%';
         latausProsentti++;
-        setTimeout(prosenttiLataus3, prosenttiSpeed);
+        setTimeout(prosenttiLataus4, prosenttiSpeed);
     } else {
-        setTimeout(function() {
+        setTimeout(() => {
             latausProsentti = 0;
             i = 0;
             pohjaTeksti = "";
-            phase4Ele.innerHTML += "<br><b>> VAULT_OPENED: PROJECT_ACCESS_GRANTED</b>";
+            phase4Ele.innerHTML += "<br><b>> CALIBRATION: COMPLETE</b>";
             setTimeout(siirryPhase5, vaiheViive);
         }, statusViive);
     }
 }
-// Phase vaihto
 function siirryPhase5() {
     phase4Ele.style.display = "none";
     phase5Ele.style.visibility = "visible";
 
-    if (i === 0) {
-        phase5Ele.innerHTML += "<br><br>";
-    }
+    if (i === 0) phase5Ele.innerHTML += "<br><br>";
 
-    if (i < txt17.length) {
-        phase5Ele.innerHTML += txt17.charAt(i);
+    if (i < txt13.length) {
+        phase5Ele.innerHTML += txt13.charAt(i);
         i++;
         setTimeout(siirryPhase5, kirjoitusNopeus);
     } else {
         i = 0;
         phase5Ele.innerHTML += "<br>";
-        setTimeout(tulostaTxt18, riviViive);
+        setTimeout(tulostaTxt14, riviViive);
     }
 }
-function tulostaTxt18() {
-    if (i < txt18.length) {
-        phase5Ele.innerHTML += txt18.charAt(i);
+function tulostaTxt14() {
+    if (i < txt14.length) {
+        phase5Ele.innerHTML += txt14.charAt(i);
         i++;
-        setTimeout(tulostaTxt18, kirjoitusNopeus);
+        setTimeout(tulostaTxt14, kirjoitusNopeus);
     } else {
         i = 0;
         phase5Ele.innerHTML += "<br>";
-        setTimeout(tulostaTxt19, riviViive);
+        setTimeout(tulostaTxt15, riviViive);
     }
 }
-function tulostaTxt19() {
-    if (i < txt19.length) {
-        phase5Ele.innerHTML += txt19.charAt(i);
+function tulostaTxt15() {
+    if (i < txt15.length) {
+        phase5Ele.innerHTML += txt15.charAt(i);
         i++;
-        setTimeout(tulostaTxt19, kirjoitusNopeus);
+        setTimeout(tulostaTxt15, kirjoitusNopeus);
     } else {
         pohjaTeksti = phase5Ele.innerHTML;
-        i = 0;
-        setTimeout(prosenttiLataus4, riviViive);
+        setTimeout(prosenttiLataus5, 200);
     }
 }
-function prosenttiLataus4() {
+// Prosenttilataus — Phase 5
+function prosenttiLataus5() {
     if (latausProsentti <= 100) {
         phase5Ele.innerHTML = pohjaTeksti + ' ' + latausProsentti + '%';
         latausProsentti++;
-        setTimeout(prosenttiLataus4, prosenttiSpeed);
+        setTimeout(prosenttiLataus5, prosenttiSpeed);
     } else {
-        setTimeout(function() {
+        setTimeout(() => {
             latausProsentti = 0;
             i = 0;
             pohjaTeksti = "";
-            phase5Ele.innerHTML += "<br><b>> WELCOME_USER. SELECT_PROJECT_TO_BEGIN</b>";
-            enterReady();
+            phase5Ele.innerHTML += "<br><b>> SYSTEM_ONLINE. AWAITING_INPUT.</b>";
+            naytaNeuralLinkBtn();
         }, statusViive);
     }
 }
 
 
-// Funktio joka käynnistys sekvenssin jälkeen muuttaa overclock button niin
-// että painalluksen jälkeen avautuu pääsisältö
-function enterReady() {
-    const overclockBtn = document.getElementById("overclock-hint");
+// Näyttää ESTABLISH NEURAL LINK napin sekvenssin päätyttyä
+function naytaNeuralLinkBtn() {
+    const btn = document.getElementById("neural-link-btn");
 
-    if (overclockBtn) {
-        overclockBtn.innerText = "ESTABLISH NEURAL LINK";
-        overclockBtn.classList.add("ready-to-enter");
+    // Pieni tauko ennen fadea
+    setTimeout(() => {
 
-        overclockBtn.onclick = () => {
-            if (overclockBtn.classList.contains("overclock-active")) {
-                overclockBtn.style.backgroundColor = "#FF0000";
-            } else {
-                overclockBtn.style.backgroundColor = "#00FF9F";
+        // Fadeaa phase5 teksti pois
+        phase5Ele.style.transition = "opacity 0.8s ease-out";
+        phase5Ele.style.opacity = "0";
+
+        // Kun phase5 on pois, tuodaan nappi fade-inilla
+        setTimeout(() => {
+            phase5Ele.style.display = "none";
+
+            if (btn) {
+                btn.style.opacity = "0";
+                btn.style.display = "block";
+                btn.style.transition = "opacity 0.8s ease-in";
+
+                requestAnimationFrame(() => {
+                    btn.style.opacity = "1";
+                });
+
+                btn.onclick = () => {
+                    btn.style.backgroundColor = "#00FF9F";
+                    btn.style.color = "#000";
+                    avaaMainHud();
+                };
             }
-            overclockBtn.style.color = "#000";
-            avaaMainHud();
-        }
-    }
+        }, 900); // odotellaan fade-out loppuun
+
+    }, 800); // tauko ennen faden alkua
 }
 
 
-// Pääsisältö ja sen funktio joka piilottaa boot-screenin
-// sekä tuo pääsisällön näkyviin
+// Piilottaa boot-screenin ja tuo päänäkymän näkyviin
 function avaaMainHud() {
     const bootScreen = document.getElementById("boot-screen");
     const mainContent = document.getElementById("main-content");
 
-    // Häivytetään latausruutu ja taustakuvat pois
+    // Häivytetään boot-screen pois
     setTimeout(() => {
-        const fadeOut = "opacity 1.5s ease-out";
-        bootScreen.style.transition = fadeOut;
-
+        bootScreen.style.transition = "opacity 1.5s ease-out";
         requestAnimationFrame(() => {
             bootScreen.style.opacity = "0";
         });
     }, 50);
 
-
-    // Tuodaan varsinainen päänäkymä näkyviin
+    // Tuodaan päänäkymä näkyviin
     setTimeout(() => {
         bootScreen.style.display = "none";
-        
         mainContent.style.display = "block";
 
         setTimeout(() => {
             mainContent.style.visibility = "visible";
             mainContent.style.opacity = "1";
-
             kaynnistaHudElementit();
         }, 50);
     }, 1600);
@@ -471,6 +428,9 @@ const projectData = {
         demo: "https://jukkapekka.com/portfolio/wasteland-journal"
     }
 };
+
+
+// Avaa projekti-popup ikkunan ja täyttää sen datalla
 window.openProjectWindow = function(id) {
     const data = projectData[id];
     if (!data) return;
@@ -486,21 +446,29 @@ window.openProjectWindow = function(id) {
     win.style.display = "block";
     setTimeout(() => win.classList.add("active"), 10);
 };
+
+
+// Sulkee projekti-popup ikkunan
 window.closeProject = function() {
     const win = document.getElementById("project-display");
     win.classList.remove("active");
     const card = document.querySelector(".unit-card.sliding-out");
     if (card) {
         setTimeout(() => {
-            card.classList.remove("sliding-out");
+            card.classList.remove("sliding-out")
         }, 400);
     }
     setTimeout(() => { win.style.display = "none"; }, 400);
 };
+
+
+// Projektikorttien klikkaus & salauksen purku
 document.addEventListener("DOMContentLoaded", () => {
     const unit01 = document.getElementById("unit-01");
 
     unit01.addEventListener("click", function() {
+
+        // Jos kortti on jo purettu -> vedetään ulos ja avataan ikkuna
         if (this.classList.contains("extracted")) {
             this.classList.add("sliding-out");
 
@@ -510,15 +478,16 @@ document.addEventListener("DOMContentLoaded", () => {
             return;
         }
 
+        // Estetään uusi klikkaus purun aikana
         if (this.classList.contains("decrypting")) return;
         
         this.classList.add("decrypting");
         const statusText = this.querySelector(".status-text");
         const actionText = this.querySelector(".unit-action");
-
         let progress = 0;
         const targetName = "WASTELAND_JOURNAL";
 
+        // Simuloidaan salauksen purkua prosenteilla
         const interval = setInterval(() => {
             progress += Math.floor(Math.random() * 5) + 2;
 
@@ -533,7 +502,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
 
-    // Projektiekorttien salauksen purku ja scramble efekti
+    // Projektiekorttien salauksen purku ja scramble efekti paljastaa projektin nimen
     function finalizeDecryption(element, actionElement, finalName, card) {
         const chars = "⠁⠂⠃⠄⡀⡁⡂⡃⡄⢀⢁⢂⢃⢄⣀⣁⣂⣃⠃⠗⠁⠊⠇⠵⠴⠷⠦";
         let iteration = 0;
@@ -565,35 +534,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
 // Tapahtuma ketju sivuun latauksen yhteydessä
 window.onload = () => {
-
-    // Kellotus nappi ilmestyy 1 sek käynnistyksen jälkeen
-    const overclockBtn = document.getElementById("overclock-hint");
-    setTimeout(() => {
-        if (overclockBtn) overclockBtn.style.display = "block";
-    }, 1000);
-
-    // Jos overclock buttinia painetaan niin muuttaa tekstit ja buttonin punaiseksi
-    if (overclockBtn) {
-        overclockBtn.onclick = () => {
-            kirjoitusNopeus = 5;
-            prosenttiSpeed = 5;
-            riviViive = 5;
-            vaiheViive = 5;
-            statusViive = 5;
-            overclockBtn.classList.add('overclock-active');
-            overclockBtn.innerText = "SYSTEM_OVERCLOCKED";
-            overclockBtn.style.color = "#FF0000";
-            overclockBtn.style.borderColor = "#FF0000";
-            overclockBtn.style.boxShadow = "0 0 15px #FF0000";
-
-            const phaseElements = [phase1Ele, phase2Ele, phase3Ele, phase4Ele, phase5Ele];
-            phaseElements.forEach(el => {
-                el.style.color = "#FF0000";
-                el.style.textShadow = "0 0 5px #FF0000";
-                el.style.borderColor = "#FF0000";
-            })
-        };
-    };
     
     //PÄIVITETÄÄN NYKYINEN VUOSI FOOTERIIN
     const yearSpan = document.getElementById("current-year");
