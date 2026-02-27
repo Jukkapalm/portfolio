@@ -41,34 +41,34 @@ JavaScipt tuo esiin yksitellen */
 }
 
 
-/* Kellotus napin asetukset */
-#overclock-hint {
-    position: absolute;
-    bottom: 16vh;
-    right: 8vw;
-    left: auto;
+/* Establish neural link  napin asetukset */
+#neural-link-btn {
+    position: fixed;
+    bottom: auto;
+    right: auto;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     color: #00FF9F;
-    font-family: 'Courier New', monospace;
+    font-family: "Courier New", monospace;
     font-size: clamp(0.9rem, 1vw + 0.5rem, 1.3rem);
     letter-spacing: 2px;
-    opacity: 1;
     display: none;
+    opacity: 0;
     cursor: pointer;
     border: 1px solid #00FF9F;
-    padding: 5px 10px;
+    padding: 10px 20px;
     border-radius: 5px;
-    animation: overclock-pulse 3s infinite;
-    text-align: center;
-}
-/* Tässä asetukset jotka tuleva overclock nappiin, missä javascript on vaihtanut
-napin tyylejä kun sivu jää odottamaan käyttäjän painamista josta jatketaan päänäkymään  */
-.ready-to-enter {
     box-shadow: 0 0 15px #00FF9F;
     font-weight: bold;
+    text-align: center;
+    animation: neural-pulse 2s infinite;
+    z-index: 50;
 }
-/* Jos kellotus nappia painettu niin vilkkumis animaatio pois */
-.overclock-active {
-    animation: none !important;
+/* Neural link napin pulssaaminen */
+@keyframes neural-pulse {
+    0%, 100% { box-shadow: 0 0 10px #00FF9F; opacity: 0.5; }
+    50%       { box-shadow: 0 0 25px #00FF9F; opacity: 1; }
 }
 
 
@@ -212,6 +212,7 @@ napin tyylejä kun sivu jää odottamaan käyttäjän painamista josta jatketaan
     border-color: #00FF9F;
     z-index: 2;
 }
+/* Lukittujen korttien punainen teksti */
 .unit-locked .unit-status,
 .unit-locked .unit-action {
     color: #FF4444;
@@ -404,15 +405,6 @@ napin tyylejä kun sivu jää odottamaan käyttäjän painamista josta jatketaan
         left: 5vw;
         bottom: 10vh;
     }
-    #overclock-hint {
-        position: fixed;
-        bottom: auto;
-        right: auto;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        margin: 0;
-    }
 }
 
 
@@ -452,14 +444,6 @@ napin tyylejä kun sivu jää odottamaan käyttäjän painamista josta jatketaan
     .project-image-container img {
         max-height: 200px;
     }
-}
-
-
-/* Kellotus napin pulssaaminen */
-@keyframes overclock-pulse {
-    0% { opacity: 0; }
-    50% { opacity: 1; }
-    100% { opacity: 0; }
 }
 
 
