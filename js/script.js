@@ -392,6 +392,9 @@ function kaynnistaHudElementit() {
 
     updateBraille();
 
+    // Käynnistetään neuroverkkoanimaatio taustalle
+    kaynnistaNeuroverkko();
+
     if (footer) {
         footer.style.opacity = "1";
         footer.style.visibility = "visible";
@@ -530,6 +533,130 @@ document.addEventListener("DOMContentLoaded", () => {
         }, 30);
     }
 });
+
+
+// Neuroverkko partikkelianimaatio
+const NEURO_ASETUKSET = {
+    // tässä voi säätää partikkelien asetuksia
+    tiheys: 20000,
+    nopeusMin: 0.15,
+    nopeusMax: 0.55,
+    partikkeliKoko: 2.0,  //pikseliä
+    yhteysEtaisyys: 140,  // pikseliä
+    partikkeliVari: "0, 255, 159",
+    viivaVari: "0, 255, 159",
+    partikkeliOpacity: 0.7,
+    viivaOpacityMax: 1,  // Maksimi opacity, himmenee etäisyyden mukaan
+    viivaPaksuus: 0.6, //pikseliä
+};
+// Sisäiset muuttujat neuroverkkoon
+let neuroCanvas = null;
+let neuroCtx = null;
+let neuroAnimaatioId = null;
+let partikkelit = [];
+let neuroAktiivinen = false;
+// Luo yhden partikkelin satunnaisella sijainnilla ja nopeudella
+function luoPartikkeli(leveys, korkeus) {
+    const nopeus = NEURO_ASETUKSET.nopeusMin + Math.random() * (NEURO_ASETUKSET.nopeusMax - NEURO_ASETUKSET.nopeusMin);
+    const kulma = Math.random() * Math.PI * 2;
+
+    return {
+        x: Math.random() * leveys,
+        y: Math.random() * korkeus,
+        vx: Math.cos(kulma) * nopeus,
+        vy: Math.sin(kulma) * nopeus,
+    };
+}
+// Alustaa partikkelit ruudun koon mukaan
+function alustaPartikkelit() {
+    const leveys = neuroCanvas.width;
+    const korkeus = neuroCanvas.height;
+    const maara = Math.floor((leveys * korkeus) / NEURO_ASETUKSET.tiheys);
+
+    partikkelit = Array.from({ length: maara }, () => luoPartikkeli(leveys, korkeus));
+}
+// Piirtää yhden animaatioruudun - partikkelit + yhteyslinjat
+function piirraNeuroRuutu() {
+    const ctx = neuroCtx;
+    const leveys = neuroCanvas.width;
+    const korkeus = neuroCanvas.height;
+    const etMax = NEURO_ASETUKSET.yhteysEtaisyys;
+    const etMax2 = etMax * etMax;
+
+    ctx.clearRect(0, 0, leveys, korkeus);
+
+    // Päivitetään partikkelian sijainnit
+    for (const p of partikkelit) {
+        p.x += p.vx;
+        p.y += p.vy;
+
+        // Pomppu reunoilta, käännetään suunta
+        if (p.x < 0)        { p.x = 0; p.vx *= -1; }
+        if (p.x > leveys)   { p.x = leveys; p.vx *= -1; }
+        if (p.y < 0)        { p.y = 0; p.vy *= -1; }
+        if (p.y > korkeus)  { p.y = korkeus; p.vy *= -1;}
+    }
+
+    // Piirretään yhteyslinjat
+    for (let a = 0; a < partikkelit.length; a++) {
+        for (let b = a + 1; b < partikkelit.length; b++) {
+            const dx = partikkelit[a].x - partikkelit[b].x;
+            const dy = partikkelit[a].y - partikkelit[b].y;
+            const dist2 = dx * dx + dy * dy;
+
+            if (dist2 > etMax2) continue;
+
+            // Opacity himmenee lineaarisesti etäisyyden mukaan
+            const suhde = 1 - Math.sqrt(dist2) / etMax;
+            const alpha = suhde * NEURO_ASETUKSET.viivaOpacityMax;
+
+            ctx.beginPath();
+            ctx.moveTo(partikkelit[a].x, partikkelit[a].y);
+            ctx.lineTo(partikkelit[b].x, partikkelit[b].y);
+            ctx.strokeStyle = `rgba(${NEURO_ASETUKSET.viivaVari}, ${alpha})`;
+            ctx.lineWidth = NEURO_ASETUKSET.viivaPaksuus;
+            ctx.stroke();
+        }
+    }
+
+    // Piirretään partikkelit
+    for (const p of partikkelit) {
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, NEURO_ASETUKSET.partikkeliKoko, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(${NEURO_ASETUKSET.partikkeliVari}, ${NEURO_ASETUKSET.partikkeliOpacity})`;
+        ctx.fill();
+    }
+}
+// Pääanimaatiosilmukka
+function neuroSilmukka() {
+    if (!neuroAktiivinen) return;
+    piirraNeuroRuutu();
+    neuroAnimaatioId = requestAnimationFrame(neuroSilmukka);
+}
+// Käynnistää neuroverkkoanimaation - kutsutaan kaynistaHudElemementit():stä
+function kaynnistaNeuroverkko() {
+    neuroCanvas = document.getElementById("neuro-canvas");
+    if (!neuroCanvas) return;
+    neuroCtx = neuroCanvas.getContext("2d");
+
+    neuroCanvas.width = window.innerWidth;
+    neuroCanvas.height = window.innerHeight;
+
+    alustaPartikkelit();
+
+    neuroAktiivinen = true;
+    neuroSilmukka();
+
+    // Fade-in CSS-luokan avulla
+    requestAnimationFrame(() => neuroCanvas.classList.add("aktiivinen"));
+
+    // Uudelleen piirto kun ruudun koko muuttuu
+    window.addEventListener("resize", () => {
+        neuroCanvas.width = window.innerWidth;
+        neuroCanvas.height = window.innerHeight;
+        alustaPartikkelit();
+    });
+}
 
 
 // Tapahtuma ketju sivuun latauksen yhteydessä
