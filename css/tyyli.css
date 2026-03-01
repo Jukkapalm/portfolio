@@ -44,8 +44,6 @@ JavaScipt tuo esiin yksitellen */
 /* Establish neural link  napin asetukset */
 #neural-link-btn {
     position: fixed;
-    bottom: auto;
-    right: auto;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
@@ -62,13 +60,20 @@ JavaScipt tuo esiin yksitellen */
     box-shadow: 0 0 15px #00FF9F;
     font-weight: bold;
     text-align: center;
-    animation: neural-pulse 2s infinite;
     z-index: 50;
 }
-/* Neural link napin pulssaaminen */
+#neural-link-btn.pulse-aktiivinen {
+    animation:
+        neural-fadein 0.8s ease-in forwards,
+        neural-pulse 2s 0.8s infinite;
+}
+@keyframes neural-fadein {
+    0%   { opacity: 0; box-shadow: 0 0 5px #00FF9F; }
+    100% { opacity: 1; box-shadow: 0 0 25px #00FF9F; }
+}
 @keyframes neural-pulse {
-    0%, 100% { box-shadow: 0 0 10px #00FF9F; opacity: 0.5; }
-    50%       { box-shadow: 0 0 25px #00FF9F; opacity: 1; }
+    0%, 100% { opacity: 1;   box-shadow: 0 0 25px #00FF9F; }
+    50%       { opacity: 0.5; box-shadow: 0 0 10px #00FF9F; }
 }
 
 
@@ -404,9 +409,6 @@ JavaScipt tuo esiin yksitellen */
     #phase-4,
     #phase-5 {
         left: 6vw;
-    }
-    #overclock-hint {
-        right: 4vw;
     }
 }
 

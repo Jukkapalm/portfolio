@@ -330,13 +330,8 @@ function naytaNeuralLinkBtn() {
             phase5Ele.style.display = "none";
 
             if (btn) {
-                btn.style.opacity = "0";
                 btn.style.display = "block";
-                btn.style.transition = "opacity 0.8s ease-in";
-
-                requestAnimationFrame(() => {
-                    btn.style.opacity = "1";
-                });
+                requestAnimationFrame(() => btn.classList.add("pulse-aktiivinen"));
 
                 btn.onclick = () => {
                     btn.style.backgroundColor = "#00FF9F";
