@@ -1,0 +1,473 @@
+/* CSS muuttujat - väripaletti ja fontit */
+:root {
+    --bg: #08080F;
+    --panel: #0D0D1A;
+    --panel-light: #12112A;
+    --violet: #9D4EDD;
+    --violet-dim: rgba(157, 78, 221, 0.15);
+    --violet-glow: rgba(157, 78, 221, 0.4);
+    --amber: #F0A500;
+    --amber-dim: rgba(240, 165, 0, 0.15);
+    --text: #E8E8FF;
+    --muted: #6666AA;
+    --red: #FF4466;
+    --red-dim: rgba(255, 68, 102, 0.15);
+    --green: #00FF9F;
+    --font-mono: 'Share Tech Mono', 'Courier New', monospace;
+    --font-display: 'Bruno Ace SC', monospace;
+}
+
+/* Pohja */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+    width: 100%;
+    min-height: 100vh;
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-mono);
+    overflow-x: hidden;
+}
+
+/* Neuroverkko-canvas */
+#neuro-canvas {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 1.5s ease;
+}
+#neuro-canvas.aktiivinen { opacity: 1; }
+
+/* Käynnistysanimaatio */
+#boot-overlay {
+    position: fixed;
+    inset: 0;
+    background: var(--bg);
+    z-index: 999;
+    pointer-events: none;
+    opacity: 1;
+    transition: opacity 0.6s ease;
+}
+#boot-overlay.poistu { opacity: 0; }
+
+/* Scanline, liukuu alas boottauksen aikana */
+#boot-scanline {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: linear-gradient(90deg, transparent, var(--violet), transparent);
+    animation: boot-scan 1.5s ease-in-out infinite;
+    opacity: 0.6;
+}
+@keyframes boot-scan {
+    0%   { top: 0; }
+    100% { top: 100vh; }
+}
+
+/* Pääsisältö */
+#main-content {
+    position: relative;
+    z-index: 1;
+    opacity: 0;
+    transition: opacity 0.8s ease;
+}
+#main-content.aktiivinen { opacity: 1; }
+
+/* Terminaali-ikkuna */
+.terminal {
+    background: rgba(13, 13, 26, 0.92);
+    border: 1px solid var(--violet);
+    box-shadow: 0 0 40px rgba(157, 78, 221, 0.15), 0 0 80px rgba(157, 78, 221, 0.05);
+    overflow: hidden;
+
+    /* Flicker käynnistyksessä*/
+    opacity: 0;
+    transition: 0.4s ease;
+}
+.terminal.aktiivinen { opacity: 1; }
+
+/* Terminaalin otsikkopalkki */
+.terminal-header {
+    background: rgba(157, 78, 221, 0.1);
+    border-bottom: 1px solid var(--muted);
+    padding: 0.5rem 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+.terminal-header-left {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+.terminal-header-right {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 2px;
+}
+
+/* Liikennevalo pisteet */
+.t-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    display: inline-block;
+}
+.dot-red    { background: var(--red);    box-shadow: 0 0 5px var(--red); }
+.dot-amber  { background: var(--amber);  box-shadow: 0 0 5px var(--amber); }
+.dot-violet { background: var(--violet); box-shadow: 0 0 5px var(--violet); }
+
+.t-title {
+    font-family: var(--font-display);
+    font-size: clamp(0.7rem, 1.5vw, 0.95rem);
+    color: var(--violet);
+    letter-spacing: 0.08em;
+    text-shadow: 0 0 10px var(--violet-glow);
+}
+.t-meta {
+    font-size: clamp(0.55rem, 1vw, 0.65rem);
+    color: var(--amber);
+    letter-spacing: 0.1em;
+}
+.t-meta-dim {
+    font-size: clamp(0.5rem, 0.9vw, 0.6rem);
+    color: var(--muted);
+    letter-spacing: 0.08em;
+}
+
+/* Terminaalin sisältöalue */
+.terminal-body {
+    padding: 1.2rem 1.5rem;
+    min-height: 300px;
+}
+
+/* Käynnistys output */
+#boot-output {
+    margin-bottom: 1rem;
+}
+.boot-line {
+    font-size: clamp(0.65rem, 1.2vw, 0.78rem);
+    color: var(--muted);
+    line-height: 1.8;
+    opacity: 0;
+    animation: line-fadein 0.15s forwards;
+}
+.boot-line.highlight { color: var(--violet); }
+.boot-line.success   { color: var(--green); }
+.boot-line.warn      { color: var(--amber); }
+@keyframes line-fadein { to { opacity: 1; } }
+
+/* Prosessilista - projektit */
+.list-header {
+    display: grid;
+    grid-template-columns: 55px 1fr 95px 65px;
+    color: var(--muted);
+    font-size: 0.6rem;
+    letter-spacing: 0.15em;
+    padding: 0.4rem 0.8rem;
+    border-bottom: 1px solid var(--muted);
+    margin-bottom: 0.3rem;
+    text-transform: uppercase;
+}
+
+/* Yksittäinen projektirivi */
+.process-row {
+    display: grid;
+    grid-template-columns: 55px 1fr 95px 65px;
+    padding: 0.55rem 0.8rem;
+    border-radius: 3px;
+    cursor: pointer;
+    border-left: 2px solid transparent;
+    transition: background 0.2s, border-color 0.2s;
+    align-items: center;
+}
+.process-row:hover {
+    background: var(--violet-dim);
+    border-left-color: var(--violet);
+}
+.process-row.active {
+    background: var(--violet-dim);
+    border-left-color: var(--violet);
+}
+.process-row.locked:hover {
+    background: var(--red-dim);
+    border-left-color: var(--red);
+}
+
+/* Mobiili layout */
+@media (max-width: 575px) {
+    .process-row {
+        grid-template-columns: 45px 1fr 80px;
+    }
+    .process-row .p-size { display: none; }
+    .list-header { display: none; }
+}
+
+.p-pid   { font-size: 0.65rem; color: var(--muted); }
+.p-name  { font-size: 0.75rem; color: var(--text); letter-spacing: 0.04em; }
+.p-name .unit-id { color: var(--violet); }
+.process-row.locked .p-name .unit-id { color: var(--red); }
+.p-size  { font-size: 0.62rem; color: var(--muted); }
+
+/* Status badge */
+.p-status {
+    font-size: 0.58rem;
+    padding: 2px 7px;
+    border-radius: 2px;
+    letter-spacing: 0.08em;
+    width: fit-content;
+    text-transform: uppercase;
+}
+.status-active  { background: var(--violet-dim); color: var(--violet); border: 1px solid var(--violet); }
+.status-standby { background: var(--amber-dim);  color: var(--amber);  border: 1px solid var(--amber); }
+.status-locked  { background: var(--red-dim);    color: var(--red);    border: 1px solid var(--red); }
+
+/* Laajennettu detaljirivi */
+.process-detail {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease;
+    border-left: 2px solid var(--violet);
+    background: rgba(157, 78, 221, 0.04);
+}
+.process-detail.auki { max-height: 140px; }
+.process-row.locked + .process-detail {
+    border-left-color: var(--red);
+    background: var(--red-dim);
+}
+.detail-inner { padding: 0.7rem 1rem 0.7rem 1.2rem; }
+.detail-desc {
+    font-size: 0.72rem;
+    color: var(--text);
+    opacity: 0.75;
+    line-height: 1.6;
+    margin-bottom: 0.5rem;
+}
+.detail-tags { display: flex; flex-wrap: wrap; gap: 0.35rem; }
+.detail-tag {
+    font-size: 0.58rem;
+    padding: 2px 7px;
+    border: 1px solid var(--amber);
+    color: var(--amber);
+    border-radius: 2px;
+}
+
+/* KomentoriviUI */
+#cmd-output {
+    margin-bottom: 0.5rem;
+    max-height: 120px;
+    overflow-y: auto;
+    scrollbar-width: none;
+}
+#cmd-output::-webkit-scrollbar { display: none; }
+.cmd-output-line {
+    font-size: clamp(0.65rem, 1.1vw, 0.75rem);
+    line-height: 1.7;
+    color: var(--muted);
+}
+.cmd-output-line.cmd-echo   { color: var(--violet); }
+.cmd-output-line.cmd-ok     { color: var(--green); }
+.cmd-output-line.cmd-err    { color: var(--red); }
+.cmd-output-line.cmd-warn   { color: var(--amber); }
+
+.cmd-input-row {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 0.8rem;
+    border-top: 1px solid rgba(68, 68, 102, 0.4);
+    padding-top: 0.7rem;
+}
+.cmd-prompt {
+    font-size: clamp(0.65rem, 1.1vw, 0.75rem);
+    color: var(--violet);
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+.cmd-input {
+    background: transparent;
+    border: none;
+    outline: none;
+    color: var(--text);
+    font-family: var(--font-mono);
+    font-size: clamp(0.65rem, 1.1vw, 0.75rem);
+    flex: 1;
+    caret-color: var(--violet);
+    letter-spacing: 0.05em;
+}
+.cmd-input::placeholder { color: var(--muted); opacity: 0.5; }
+
+/* Projekti-popup */
+.project-popup {
+    position: fixed;
+    inset: 0;
+    background: rgba(8, 8, 15, 0.85);
+    z-index: 200;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+    backdrop-filter: blur(4px);
+}
+.project-popup.auki {
+    opacity: 1;
+    pointer-events: all;
+}
+.popup-inner {
+    background: var(--panel);
+    border: 1px solid var(--violet);
+    border-radius: 6px;
+    box-shadow: 0 0 50px rgba(157, 78, 221, 0.25);
+    max-width: 760px;
+    width: 100%;
+    max-height: 85vh;
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: var(--muted) transparent;
+    transform: scale(0.95);
+    transition: transform 0.3s ease;
+}
+.project-popup.auki .popup-inner { transform: scale(1); }
+.popup-header {
+    background: rgba(157, 78, 221, 0.12);
+    border-bottom: 1px solid var(--muted);
+    padding: 0.6rem 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.popup-title {
+    font-family: var(--font-display);
+    font-size: clamp(0.65rem, 1.3vw, 0.85rem);
+    color: var(--violet);
+    letter-spacing: 0.1em;
+    text-shadow: 0 0 10px var(--violet-glow);
+}
+.popup-close {
+    background: none;
+    border: none;
+    color: var(--muted);
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    cursor: pointer;
+    transition: color 0.2s;
+    flex-shrink: 0;
+}
+.popup-close:hover { color: var(--red); }
+
+.popup-body { padding: 1.2rem 1rem; }
+
+.popup-img-wrap {
+    position: relative;
+    background: #000;
+    border: 1px solid var(--muted);
+    border-radius: 4px;
+    overflow: hidden;
+}
+.popup-img-wrap img {
+    width: 100%;
+    height: auto;
+    display: block;
+    opacity: 0.85;
+}
+/* Placeholder kuvalle */
+.popup-img-wrap .img-placeholder {
+    width: 100%;
+    height: 180px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--muted);
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+}
+
+.popup-scanline {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 3px;
+    background: linear-gradient(90deg, transparent, var(--violet), transparent);
+    animation: scan-popup 4s linear infinite;
+}
+@keyframes scan-popup { 0% { top: 0; } 100% { top: 100%; } }
+
+.info-label {
+    font-size: 0.62rem;
+    color: var(--violet);
+    letter-spacing: 0.2em;
+    margin-bottom: 0.4rem;
+    text-transform: uppercase;
+}
+.info-text {
+    font-size: 0.78rem;
+    color: var(--text);
+    opacity: 0.8;
+    line-height: 1.7;
+    margin-bottom: 1rem;
+}
+.popup-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 0.5rem; }
+.popup-tag {
+    font-size: 0.6rem;
+    padding: 2px 8px;
+    border: 1px solid var(--amber);
+    color: var(--amber);
+    border-radius: 2px;
+}
+/* Napit popupissa */
+.cyber-btn {
+    display: inline-block;
+    padding: 7px 16px;
+    border: 1px solid var(--violet);
+    color: var(--violet);
+    text-decoration: none;
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.08em;
+    border-radius: 3px;
+    transition: background 0.2s, box-shadow 0.2s, color 0.2s;
+}
+.cyber-btn:hover {
+    background: var(--violet-dim);
+    box-shadow: 0 0 12px var(--violet-glow);
+    color: var(--text);
+}
+.cyber-btn-amber {
+    border-color: var(--amber);
+    color: var(--amber);
+}
+.cyber-btn-amber:hover {
+    background: var(--amber-dim);
+    box-shadow: 0 0 12px rgba(240, 165, 0, 0.4);
+    color: var(--text);
+}
+
+/* Flicker animaatiot */
+@keyframes flicker-in {
+    0%          { opacity: 0; }
+    20%         { opacity: 0; }
+    21%         { opacity: 1; }
+    22%         { opacity: 0; }
+    23%         { opacity: 1; }
+    24%         { opacity: 0; }
+    25%         { opacity: 1; }
+    26%         { opacity: 0; }
+    28%         { opacity: 1; }
+    100%        { opacity: 1; }
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: var(--muted); border-radius: 2px; }

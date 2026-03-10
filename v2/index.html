@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="fi">
+    <head>
+        <!-- Sivun perusasetukset -->
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Jukka Palm | Portfolio</title>
+        <meta name="description" content="Jukka Palm - ohjelmistokehittäjä. AI-teemainen portfolio.">
+        <meta name="author" content="Jukka Palm">
+
+        <!-- Open Graph -->
+        <meta property="og:title" content="Jukka Palm | Portfolio">
+        <meta property="og:description" content="Ohjelmistokehittäjän portfolio — projektit ja osaaminen.">
+        <meta property="og:type" content="website">
+
+        <!-- Bootstrap -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Bruno+Ace+SC&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
+
+        <!-- Oma CSS -->
+        <link rel="stylesheet" href="css/tyylit.css">
+    </head>
+    <body>
+        
+        <!-- Neuroverkko -->
+        <canvas id="neuro-canvas"></canvas>
+
+        <!-- Käynnistysanimaatio -->
+        <div id="boot-overlay">
+            <div id="boot-scanline"></div>
+        </div>
+
+        <!-- Main content -->
+        <div id="main-content" class="container-fluid">
+            <div class="row justify-content-center min-vh-100 align-items-center py-4">
+                <div class="col-12 col-md-10 col-lg-8 col-xl-7">
+
+                    <!-- Terminaali-ikkuna -->
+                    <div class="terminal" id="terminal-window">
+
+                        <!-- Terminaali header -->
+                        <div class="terminal-header">
+                            <div class="terminal-header-left">
+                                <span class="t-dot dot-red"></span>
+                                <span class="t-dot dot-amber"></span>
+                                <span class="t-dot dot-violet"></span>
+                                <span class="t-title">JUKKA PALM - PORTFOLIO</span>
+                            </div>
+                            <div class="terminal-header-right">
+                                <span class="t-meta">OS_V2.0.26_STABLE</span>
+                                <span class="t-meta-dim">KERNEL: HTML / CSS / JS / BS_5.3</span>
+                            </div>
+                        </div>
+
+                        <!-- Terminaalin body -->
+                        <div class="terminal-body">
+
+                            <!-- Käynnistys output - tulostetaan JS:llä rivi kerrallaan -->
+                            <div id="boot-output"></div>
+
+                            <!-- Prosessilista - piilotettu kunnes boot valmis -->
+                            <div id="process-list" style="display: none;">
+
+                                <!-- Listan header -->
+                                <div class="list-header d-none d-sm-grid">
+                                    <span>PID</span>
+                                    <span>PROCESS_NAME</span>
+                                    <span>STATUS</span>
+                                    <span>SIZE</span>
+                                </div>
+
+                                <!-- Projektit - JS täyttää nämä projektidata objektista -->
+                                <div id="project-rows"></div>
+                            </div>
+
+                            <!-- Komentorivikäyttöliittymä - piilotettu kunnes boot valmis -->
+                            <div id="cmd-line-ui" style="display: none;">
+                                <div id="cmd-output"></div>
+                                <div class="cmd-input-row">
+                                    <span class="cmd-prompt">root@neural:~$</span>
+                                    <input type="text" id="cmd-input" class="cmd-input" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="kirjoita komento..." aria-label="Komentorivi">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Projekti-popup - aukeaa kun projekti avataan -->
+        <div id="project-popup" class="project-popup" role="dialog" aria-modal="true" aria-labelledby="popup-title">
+            <div class="popup-inner container-fluid">
+                <div class="popup-header">
+                    <span class="popup-title" id="popup-title"></span>
+                    <button class="popup-close" onclick="closePopup()" aria-label="Sulje">[ X ]</button>
+                </div>
+                <div class="row g-3 popup-body">
+                    <div class="col-12 col-md-5">
+                        <div class="popup-img-wrap">
+                            <img id="popup-img" src="" alt="">
+                            <div class="popup-scanline"></div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-7">
+                        <div class="popup-info">
+                            <div class="info-label">DESCRIPTION:</div>
+                            <p id="popup-desc" class="info-text"></p>
+                            <div class="info-label">TECHNOLOGIES:</div>
+                            <div id="popup-tags" class="popup-tags"></div>
+                            <div class="popup-links mt-4 d-flex flex-wrap gap-3">
+                                <a href="#" id="popup-repo" target="_blank" rel="noopener noreferrer" class="cyber-btn">GITHUB_REPO</a>
+                                <a href="#" id="popup-demo" target="_blank" rel="noopener noreferrer" class="cyber-btn cyber-btn-amber">LIVE_DEMO</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Bootstrap JS -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+        <!-- Oma JS -->
+        <script src="js/main.js"></script>
+
+    </body>
+</html>
