@@ -192,10 +192,17 @@ function buildProjectRows() {
             detail.innerHTML = `
                 <div class="detail-inner">
                     <div class="detail-desc">${proj.desc}</div>
-                    <div class="detail-tags">${proj.tech.map(t => `<span class="detail-tag">${t}</span>`).join('')}</div>
+                    <div class="detail-footer">
+                        <div class="detail-tags">${proj.tech.map(t => `<span class="detail-tag">${t}</span>`).join('')}</div>
+                        <button class="detail-open-btn" data-id="${proj.id}">[ OPEN_UNIT ]</button>
+                    </div>
                 </div>
             `;
             row.addEventListener('click', () => toggleDetail(proj.id));
+            detail.querySelector('.detail-open-btn').addEventListener('click', (e) => {
+                e.stopPropagation(); // estää rivin sulkeutumisen
+                openPopup(proj);
+            });
         } else {
             detail.innerHTML = `
                 <div class="detail-inner">
