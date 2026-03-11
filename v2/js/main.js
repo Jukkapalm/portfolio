@@ -28,13 +28,13 @@ const PROJECTS = [
         id: 'unit_03',
         pid: '003',
         name: 'Wasteland-journal',
-        status: 'standby',
+        status: 'active',
         size: '1.2 MB',
-        desc: 'Post-apokalyptinen bunker terminaanli joka toimii päiväkirjana, joka tallennetaan tietokantaan. Generaattori, ilmansuodatin, lämmitin ja polttoaineen jalostus tarvitsee käyttäjän toimintoja jotta päiväkirjaa voi käyttää. Autentikointi pin-koodilla',
+        desc: 'Post-apokalyptinen bunker terminaanli joka toimii päiväkirjana, joka tallennetaan tietokantaan. Generaattori, lämmitin, polttoaineen jalostus ja generaattorin jäähdytys tarvitsee käyttäjän toimintoja jotta päiväkirjaa voi käyttää. Autentikointi pin-koodilla',
         tech: ['HTML', 'CSS', 'JavaScript', 'PHP', 'MySQL'],
-        repo: '',
-        demo: '#',
-        img: ''
+        repo: 'https://github.com/Jukkapalm/wasteland-journal',
+        demo: 'https://jukkapekka.com/portfolio/wasteland-journal/',
+        img: 'images/bunker_terminal.png'
     },
     { id: 'unit_04', pid: '004', name: '[ENCRYPTED]', status: 'locked', size: '— MB' },
     { id: 'unit_05', pid: '005', name: '[ENCRYPTED]', status: 'locked', size: '— MB' },
