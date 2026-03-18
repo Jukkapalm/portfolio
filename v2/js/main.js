@@ -321,6 +321,11 @@ function handleCommand(raw, output) {
             output.innerHTML = '';
             return;
         }
+        if (responses[0] === '__home__') {
+            addCmdLine(output, '> Navigating to HOME...', 'cmd-ok');
+            setTimeout(() => { window.location.href = '../index.html'; }, 600);
+            return;
+        }
         responses.forEach((line, i) => {
             setTimeout(() => addCmdLine(output, line, 'cmd-ok'), i * 120);
         });
