@@ -3,14 +3,15 @@ const PROJECTS = [
     {
         id: 'unit_01',
         pid: '001',
-        name: 'Galactic_RM',
+        name: 'DATA_ANALYSIS // SIGNAL_INTEL',
         status: 'active',
         size: '2.4 MB',
-        desc: 'Galaktinen resurssien hallinta simulaatio. Ruoka sekä vesipula puolittaa tuotannon. Resurssiensiirto aika eri planeettojen välillä lasketaan etäisyyden mukaan. Random eventtejä siirtoaluksille ja tuotannolle. Resurssitasapainoon ja käyttöliittymään tulossa päivityksiä.',
-        tech: ['Python', 'NumPy', 'Pandas', 'Streamlit'],
-        repo: 'https://github.com/Jukkapalm/Galactic-RM',
-        demo: 'https://galactic-rm.streamlit.app/',
-        img: 'images/Galactic_RM.png'
+        desc: 'Data-analyysi projektit. Datan keruu, käsittely ja visualisointi.',
+        tech: [],
+        repo: '',
+        demo: '',
+        pageLink: 'DATA_ANALYSIS/index.html',
+        img: ''
     },
     {
         id: 'unit_02',
@@ -195,15 +196,23 @@ function buildProjectRows() {
                     <div class="detail-desc">${proj.desc}</div>
                     <div class="detail-footer">
                         <div class="detail-tags">${proj.tech.map(t => `<span class="detail-tag">${t}</span>`).join('')}</div>
-                        <button class="detail-open-btn" data-id="${proj.id}">[ OPEN_UNIT ]</button>
+                        ${proj.pageLink
+                            ? `<a class="detail-open-btn" href="${proj.pageLink}" style="text-decoration:none;">[ OPEN_UNIT ]</a>`
+                            : `<button class="detail-open-btn" data-id="${proj.id}">[ OPEN_UNIT ]</button>`
+                        }
                     </div>
                 </div>
             `;
+            // Alkuperäinen nappi modalille
+            //<button class="detail-open-btn" data-id="${proj.id}">[ OPEN_UNIT ]</button>
+
             row.addEventListener('click', () => toggleDetail(proj.id));
-            detail.querySelector('.detail-open-btn').addEventListener('click', (e) => {
-                e.stopPropagation(); // estää rivin sulkeutumisen
-                openPopup(proj);
-            });
+            if (!proj.pageLink) {
+                detail.querySelector('.detail-open-btn').addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    openPopup(proj);
+                });
+            }
         } else {
             detail.innerHTML = `
                 <div class="detail-inner">
