@@ -280,6 +280,7 @@ html, body {
     border-radius: 2px;
     transition: background 0.2s;
     flex-shrink: 0;
+    text-decoration: none;
 }
 .detail-open-btn:hover {
     background: var(--violet-dim);
