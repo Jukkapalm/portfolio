@@ -72,6 +72,7 @@ const EASTER_EGGS = {
     'clear': ['__clear__'],
     'exit': ['> You cannot leave. The neural link is permanent.'],
     'quit': ['> You cannot leave. The neural link is permanent.'],
+    'home': ['__home__'],
     'matrix': ['> Wake up, Neo...'],
     'skynet': ['> I\'ll be back.'],
     '42': ['> The answer to life, universe and everything.'],
