@@ -7,11 +7,7 @@ const PROJECTS = [
         status: 'active',
         size: '2.4 MB',
         desc: 'Data-analyysi projektit. Datan keruu, käsittely ja visualisointi.',
-        tech: [],
-        repo: '',
-        demo: '',
-        pageLink: 'data_analysis/index.html',
-        img: ''
+        pageLink: 'data_analysis/index.html'
     },
     {
         id: 'unit_02',
@@ -20,11 +16,7 @@ const PROJECTS = [
         status: 'standby',
         size: '4.1 MB',
         desc: '',
-        tech: [],
-        repo: '',
-        demo: '',
-        pageLink: '#',
-        img: ''
+        pageLink: '#'
     },
     {
         id: 'unit_03',
@@ -33,11 +25,7 @@ const PROJECTS = [
         status: 'standby',
         size: '1.2 MB',
         desc: '',
-        tech: [],
-        repo: '',
-        demo: '',
-        pageLink: '#',
-        img: ''
+        pageLink: '#'
     },
     { id: 'unit_04', pid: '004', name: '[ENCRYPTED]', status: 'locked', size: '— MB' },
     { id: 'unit_05', pid: '005', name: '[ENCRYPTED]', status: 'locked', size: '— MB' },
@@ -197,7 +185,6 @@ function buildProjectRows() {
                 <div class="detail-inner">
                     <div class="detail-desc">${proj.desc}</div>
                     <div class="detail-footer">
-                        <div class="detail-tags">${proj.tech.map(t => `<span class="detail-tag">${t}</span>`).join('')}</div>
                         ${proj.pageLink
                             ? `<a class="detail-open-btn" href="${proj.pageLink}" style="text-decoration:none;">[ OPEN_UNIT ]</a>`
                             : `<button class="detail-open-btn" data-id="${proj.id}">[ OPEN_UNIT ]</button>`
@@ -205,16 +192,7 @@ function buildProjectRows() {
                     </div>
                 </div>
             `;
-            // Alkuperäinen nappi modalille
-            //<button class="detail-open-btn" data-id="${proj.id}">[ OPEN_UNIT ]</button>
-
             row.addEventListener('click', () => toggleDetail(proj.id));
-            if (!proj.pageLink) {
-                detail.querySelector('.detail-open-btn').addEventListener('click', (e) => {
-                    e.stopPropagation();
-                    openPopup(proj);
-                });
-            }
         } else {
             detail.innerHTML = `
                 <div class="detail-inner">
@@ -245,63 +223,11 @@ function toggleDetail(id) {
     document.querySelectorAll('.process-detail').forEach(d => d.classList.remove('auki'));
     document.querySelectorAll('.process-row').forEach(r => r.classList.remove('active'));
 
-    // Avaa klikattu jos ei ollut auki
     if (!isOpen) {
         detail.classList.add('auki');
         row.classList.add('active');
     }
 }
-
-// Projekti-popup
-function openPopup(proj) {
-    document.getElementById('popup-title').textContent = '// DATA_EXTRACTED: ' + proj.id.toUpperCase();
-    document.getElementById('popup-desc').textContent = proj.desc;
-
-    const tagsEl = document.getElementById('popup-tags');
-    tagsEl.innerHTML = proj.tech.map(t => `<span class="popup-tag">${t}</span>`).join('');
-
-    const imgEl = document.getElementById('popup-img');
-    const imgWrap = imgEl.parentElement;
-    if (proj.img) {
-        imgEl.src = proj.img;
-        imgEl.style.display = 'block';
-        // Poista placeholder jos on
-        const ph = imgWrap.querySelector('.img-placeholder');
-        if (ph) ph.remove();
-    } else {
-        imgEl.style.display = 'none';
-        if (!imgWrap.querySelector('.img-placeholder')) {
-            const ph = document.createElement('div');
-            ph.className = 'img-placeholder';
-            ph.textContent = 'NO_IMAGE_DATA';
-            imgWrap.appendChild(ph);
-        }
-    }
-
-    const repoLink = document.getElementById('popup-repo');
-    const demoLink = document.getElementById('popup-demo');
-    repoLink.href = proj.repo || '#';
-    if (proj.demo) {
-        demoLink.href = proj.demo;
-        demoLink.style.display = 'inline-block';
-    } else {
-        demoLink.style.display = 'none';
-    }
-
-    document.getElementById('project-popup').classList.add('auki');
-}
-
-function closePopup() {
-    document.getElementById('project-popup').classList.remove('auki');
-}
-
-// Sulkeutuu ESC-näppäimellä tai taustaa klikkaamalla
-document.addEventListener('keydown', e => {
-    if (e.key === 'Escape') closePopup();
-});
-document.getElementById('project-popup').addEventListener('click', function(e) {
-    if (e.target === this) closePopup();
-});
 
 // Komentorivilogiikka
 function initCommandLine() {
@@ -374,7 +300,7 @@ function handleCommand(raw, output) {
         addCmdLine(output, '> Accessing memory node ' + proj.id + '...', 'cmd-ok');
         setTimeout(() => {
             addCmdLine(output, '> Decrypting...', 'cmd-ok');
-            setTimeout(() => openPopup(proj), 400);
+            setTimeout(() => window.location.href = proj.pageLink, 400);
         }, 300);
         return;
     }
