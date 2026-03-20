@@ -252,18 +252,10 @@ html, body {
     line-height: 1.6;
     margin-bottom: 0.5rem;
 }
-.detail-tags { display: flex; flex-wrap: wrap; gap: 0.35rem; }
-.detail-tag {
-    font-size: 0.65rem;
-    padding: 2px 7px;
-    border: 1px solid var(--amber);
-    color: var(--amber);
-    border-radius: 2px;
-}
 .detail-footer {
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: center;
     flex-wrap: wrap;
     gap: 0.5rem;
     margin-top: 0.4rem;
@@ -330,153 +322,6 @@ html, body {
     letter-spacing: 0.05em;
 }
 .cmd-input::placeholder { color: var(--muted); opacity: 0.5; }
-
-/* Projekti-popup */
-.project-popup {
-    position: fixed;
-    inset: 0;
-    background: rgba(8, 8, 15, 0.85);
-    z-index: 200;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 1rem;
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 0.3s ease;
-    backdrop-filter: blur(4px);
-}
-.project-popup.auki {
-    opacity: 1;
-    pointer-events: all;
-}
-.popup-inner {
-    background: var(--panel);
-    border: 1px solid var(--violet);
-    border-radius: 6px;
-    box-shadow: 0 0 50px rgba(157, 78, 221, 0.25);
-    max-width: 760px;
-    width: 100%;
-    max-height: 85vh;
-    overflow-y: auto;
-    scrollbar-width: thin;
-    scrollbar-color: var(--muted) transparent;
-    transform: scale(0.95);
-    transition: transform 0.3s ease;
-}
-.project-popup.auki .popup-inner { transform: scale(1); }
-.popup-header {
-    background: rgba(157, 78, 221, 0.12);
-    border-bottom: 1px solid var(--muted);
-    padding: 0.6rem 1rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-.popup-title {
-    font-family: var(--font-display);
-    font-size: clamp(0.65rem, 1.3vw, 0.85rem);
-    color: var(--violet);
-    letter-spacing: 0.1em;
-    text-shadow: 0 0 10px var(--violet-glow);
-}
-.popup-close {
-    background: none;
-    border: none;
-    color: var(--muted);
-    font-family: var(--font-mono);
-    font-size: 0.75rem;
-    cursor: pointer;
-    transition: color 0.2s;
-    flex-shrink: 0;
-}
-.popup-close:hover { color: var(--red); }
-
-.popup-body { padding: 1.2rem 1rem; }
-
-.popup-img-wrap {
-    position: relative;
-    background: #000;
-    border: 1px solid var(--muted);
-    border-radius: 4px;
-    overflow: hidden;
-}
-.popup-img-wrap img {
-    width: 100%;
-    height: auto;
-    display: block;
-    opacity: 0.85;
-}
-/* Placeholder kuvalle */
-.popup-img-wrap .img-placeholder {
-    width: 100%;
-    height: 180px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--muted);
-    font-size: 0.7rem;
-    letter-spacing: 0.15em;
-}
-
-.popup-scanline {
-    position: absolute;
-    top: 0; left: 0;
-    width: 100%; height: 3px;
-    background: linear-gradient(90deg, transparent, var(--violet), transparent);
-    animation: scan-popup 4s linear infinite;
-}
-@keyframes scan-popup { 0% { top: 0; } 100% { top: 100%; } }
-
-.info-label {
-    font-size: 0.7rem;
-    color: var(--violet);
-    letter-spacing: 0.2em;
-    margin-bottom: 0.4rem;
-    text-transform: uppercase;
-}
-.info-text {
-    font-size: 0.88rem;
-    color: var(--text);
-    opacity: 0.8;
-    line-height: 1.7;
-    margin-bottom: 1rem;
-}
-.popup-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 0.5rem; }
-.popup-tag {
-    font-size: 0.68rem;
-    padding: 2px 8px;
-    border: 1px solid var(--amber);
-    color: var(--amber);
-    border-radius: 2px;
-}
-/* Napit popupissa */
-.cyber-btn {
-    display: inline-block;
-    padding: 7px 16px;
-    border: 1px solid var(--violet);
-    color: var(--violet);
-    text-decoration: none;
-    font-family: var(--font-mono);
-    font-size: 0.68rem;
-    letter-spacing: 0.08em;
-    border-radius: 3px;
-    transition: background 0.2s, box-shadow 0.2s, color 0.2s;
-}
-.cyber-btn:hover {
-    background: var(--violet-dim);
-    box-shadow: 0 0 12px var(--violet-glow);
-    color: var(--text);
-}
-.cyber-btn-amber {
-    border-color: var(--amber);
-    color: var(--amber);
-}
-.cyber-btn-amber:hover {
-    background: var(--amber-dim);
-    box-shadow: 0 0 12px rgba(240, 165, 0, 0.4);
-    color: var(--text);
-}
 
 /* Flicker animaatiot */
 @keyframes flicker-in {
