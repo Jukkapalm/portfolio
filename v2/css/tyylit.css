@@ -206,10 +206,25 @@ html, body {
 /* Mobiili layout */
 @media (max-width: 575px) {
     .process-row {
-        grid-template-columns: 45px 1fr 80px;
+        grid-template-columns: 1fr auto;
+        gap: 0.3rem;
+        padding: 0.5rem 0.6rem;
     }
+    .process-row .p-pid { display: none; }
     .process-row .p-size { display: none; }
     .list-header { display: none; }
+
+    .p-name {
+        font-size: 0.75rem;
+        word-break: break-word;
+    }
+
+    .terminal-body { padding: 0.8rem 0.8rem; }
+    .terminal-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .terminal-header-right { align-items: flex-start; }
 }
 
 .p-pid   { font-size: 0.72rem; color: var(--muted); }
