@@ -338,6 +338,13 @@ html, body {
 }
 .cmd-input::placeholder { color: var(--muted); opacity: 0.5; }
 
+/* Mobiililla input font-size pakko olla 16px — muuten iOS zoomaa automaattisesti */
+@media (max-width: 767px) {
+    .cmd-input {
+        font-size: 16px;
+    }
+}
+
 /* Flicker animaatiot */
 @keyframes flicker-in {
     0%          { opacity: 0; }
