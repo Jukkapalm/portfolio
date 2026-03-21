@@ -242,8 +242,13 @@ function initCommandLine() {
         handleCommand(raw, output);
     });
 
-    // Fokus inputtiin kun klikataan terminaalia
-    document.querySelector('.terminal-body').addEventListener('click', () => input.focus());
+    // Fokus inputtiin kun klikataan komentorivi-aluetta
+    // Mobiililla (kosketusnäyttö) ei pakoteta focusta — se zoomaisi näkymän inputtiin
+    document.getElementById('cmd-line-ui').addEventListener('click', function() {
+        const isTouchDevice = window.matchMedia('(hover: none) and (pointer: coarse)').matches;
+        if (isTouchDevice) return;
+        input.focus();
+    });
 }
 
 function handleCommand(raw, output) {
