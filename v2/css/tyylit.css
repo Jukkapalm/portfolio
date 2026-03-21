@@ -27,6 +27,7 @@ html, body {
     color: var(--text);
     font-family: var(--font-mono);
     overflow-x: hidden;
+    font-size: 18px;
 }
 
 /* Neuroverkko-canvas */
@@ -128,18 +129,18 @@ html, body {
 
 .t-title {
     font-family: var(--font-display);
-    font-size: clamp(0.7rem, 1.5vw, 0.95rem);
+    font-size: clamp(0.8rem, 1.6vw, 1.05rem);
     color: var(--violet);
     letter-spacing: 0.08em;
     text-shadow: 0 0 10px var(--violet-glow);
 }
 .t-meta {
-    font-size: clamp(0.55rem, 1vw, 0.65rem);
+    font-size: clamp(0.65rem, 1.1vw, 0.75rem);
     color: var(--amber);
     letter-spacing: 0.1em;
 }
 .t-meta-dim {
-    font-size: clamp(0.5rem, 0.9vw, 0.6rem);
+    font-size: clamp(0.6rem, 1vw, 0.7rem);
     color: var(--muted);
     letter-spacing: 0.08em;
 }
@@ -151,9 +152,6 @@ html, body {
 }
 
 /* Käynnistys output */
-#boot-output {
-    margin-bottom: 1rem;
-}
 .boot-line {
     font-size: clamp(0.75rem, 1.4vw, 0.88rem);
     color: var(--muted);
@@ -242,7 +240,7 @@ html, body {
     width: fit-content;
     text-transform: uppercase;
 }
-.status-active  { background: var(--violet-dim); color: var(--violet); border: 1px solid var(--violet); }
+.status-active  { background: var(--violet-dim); color: var(--green); border: 1px solid var(--green); }
 .status-standby { background: var(--amber-dim);  color: var(--amber);  border: 1px solid var(--amber); }
 .status-locked  { background: var(--red-dim);    color: var(--red);    border: 1px solid var(--red); }
 
@@ -320,7 +318,7 @@ html, body {
     padding-top: 0.7rem;
 }
 .cmd-prompt {
-    font-size: clamp(0.75rem, 1.3vw, 0.85rem);
+    font-size: clamp(0.8rem, 1.4vw, 0.9rem);
     color: var(--violet);
     white-space: nowrap;
     flex-shrink: 0;
