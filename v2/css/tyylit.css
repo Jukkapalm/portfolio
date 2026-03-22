@@ -278,7 +278,7 @@ html, body {
     border: 1px solid var(--violet);
     color: var(--violet);
     font-family: var(--font-mono);
-    font-size: 0.65rem;
+    font-size: 0.70rem;
     padding: 2px 10px;
     cursor: pointer;
     letter-spacing: 0.08em;
