@@ -6,7 +6,7 @@ const PROJECTS = [
         name: 'Data_Driven_Apps',
         status: 'active',
         size: '2.4 MB',
-        desc: 'Ohjelmistot ja työkalut, jotka hyödyntävät dataa päätöksenteon ja automaation tukena. Datan automaattinen haku, käsittely ja reaaliaikainen seuranta.',
+        desc: 'Datan automaatio, käsittely ja reaaliaikainen seuranta. Tekniset työkalut ja järjestelmämonitorointi.',
         pageLink: 'data_analysis/index.html'
     },
     {
