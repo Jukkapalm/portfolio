@@ -3,10 +3,10 @@ const PROJECTS = [
     {
         id: 'unit_01',
         pid: '001',
-        name: 'Data_Analysis // Signal_intel',
+        name: 'Data_Driven_Apps',
         status: 'active',
         size: '2.4 MB',
-        desc: 'Data-analyysi projektit. Datan keruu, käsittely ja visualisointi.',
+        desc: 'Ohjelmistot ja työkalut, jotka hyödyntävät dataa päätöksenteon ja automaation tukena. Datan automaattinen haku, käsittely ja reaaliaikainen seuranta.',
         pageLink: 'data_analysis/index.html'
     },
     {
