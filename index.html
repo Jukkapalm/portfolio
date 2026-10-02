@@ -30,25 +30,35 @@
         
         <!-- Navigation -->
         <nav class="navbar navbar-expand-lg fixed-top">
-            <div class="container-fluid px-4">
+            <div class="container-fluid px-3">
 
                 <!-- Navbar brand and/or logo -->
                 <a class="navbar-brand" href="#">
-                    <span class="first-letter">J</span>UKKA <span class="first-letter">P</span>ALM
+                    <span class="first-letter">J</span>UKKA
+                    <span class="first-letter">P</span>ALM
                 </a>
 
-                <!-- Hamburgermenu button -->
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavbar">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
+                <div class="navbar-controls">
+
+                    <!-- Change theme button, only visible on mobile -->
+                    <button id="themeToggle" class="theme-toggle d-lg-none" type="button">Vaihda teema</button>
+
+                    <!-- Hamburgermenu button -->
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavbar">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                </div>
 
                 <div class="collapse navbar-collapse" id="collapsibleNavbar">
                     <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-1 text-center">
                         <li class="nav-item"><a class="nav-link" href="#">Minusta</a></li>
                         <li class="nav-item"><a class="nav-link" href="#">Tech Stack</a></li>
-                    </ul>
+                    </ul> 
+                    
                 </div>
 
+                <!-- Change theme button, only visible on desktop -->
+                <button id="themeToggle" class="theme-toggle d-none d-lg-flex" type="button">Vaihda teema</button>
             </div>
         </nav>
 
