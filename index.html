@@ -62,8 +62,46 @@
             </div>
         </nav>
 
+        <!-- Shared content. Left side "sidebar" about 35% and right side "main content" about 65% -->
+        <div class="container-fluid">
+            <div class="row">
+
+                <!-- Left side -->
+                <div class="col-md-4 p-0 d-none d-md-block">
+
+                    <!-- Left on the desktop, on mobile moves behind the tab  -->
+                    <aside class="sidebar">
+
+                        <!-- blog-feed -->
+                        <div class="blog-feed" id="blog-feed">
+
+                            <!-- single blog card, PHP retrieving from database, Javascript filling the feed  -->
+                            <div class="blog-card">
+                                <p class="blog-date">18.10.2026</p>
+                                <p class="blog-text">Tänne tulee mietteitä ohjelmoinnista</p>
+                            </div>
+                        </div>
+
+                        <!-- chatbot -->
+                        <div class="chat-bot">
+                            <div class="bot-header">
+                                <span class="bot-emoji">🤖</span>
+                                <span class="bot-name">Tähän tulee botin nimi</span>
+                            </div>
+                        </div>
+
+                        <div class="bot-messages">
+                            <p>Tänne suunnitteleilla tekoälybotti.</p>
+                        </div>
+                    </aside>
+                </div>
+            </div>
+        </div>
+
         <!-- Bootstrap JS -->
         <script src="js/bootstrap.bundle.min.js"></script>
+
+        <!-- Own JS -->
         <script src="js/script.js"></script>
     </body>
 </html>
