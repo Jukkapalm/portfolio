@@ -31,7 +31,6 @@ let index = 0;
 const speed = 40;
 
 function typeWriter() {
-    if (!codeElement) return;
 
     if (index < codeText.length) {
         codeElement.textContent += codeText.charAt(index);
