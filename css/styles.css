@@ -143,8 +143,9 @@ body {
     color: #1a2e22;
 }
 .body-text {
-    font-family: 'Space Grostesk', sans-serif;
+    font-family: 'Space Grotesk', sans-serif;
     color: #1a2e22;
+    letter-spacing: 1px;
 }
 .stack-cat-label {
     font-family: 'JetBrains Mono', sans-serif;
@@ -162,7 +163,7 @@ body {
 /* Tech stack section badges */
 .tech-badge {
     background: #f4f6f4;
-    border: 1px solid #1a2e22;
+    border: 1px solid #23d18b;
     font-family: 'JetBrains Mono', sans-serif;
     border-radius: 5px;
     padding: 5px;
@@ -202,6 +203,21 @@ body {
     height: 50px;
     border-bottom: 2px solid #23d18b;
     border-right: 2px solid #23d18b;
+}
+
+.card {
+    background: #f4f6f4;
+    border: 1px solid #23d18b;
+    border-radius: 5px;
+    padding: 1.5rem 2rem;
+    margin-bottom: 1.5rem;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, border 0.2s ease;
+}
+
+.card:hover {
+    transform: scale(1.01);
+    box-shadow: 0 0 10px #23d18b;
+    border: 1px solid #23d18b;
 }
 
 /* Dark theme styles */
@@ -251,12 +267,16 @@ body {
 
 [data-theme="dark-theme"] .tech-badge {
     background: #0d1117;
-    border: 1px solid #e6edf3;
+    border: 1px solid #23d18b;
     color: #e6edf3;
 }
 
 [data-theme="dark-theme"] .tech-badge:hover {
     border: 1px solid var(--badge-color);
+}
+
+[data-theme="dark-theme"] .card {
+    background: #0d1117;
 }
 
 /* Animates */
