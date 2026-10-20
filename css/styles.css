@@ -98,7 +98,7 @@ body {
 /* Site's right content settings */
 #rightContent {
     overflow-y: auto;
-    height: calc(100vh-70px);
+    height: calc(100vh - 70px);
     position: sticky;
     margin-top: 70px;
 }
@@ -244,6 +244,12 @@ body {
     transform: scale(1.2);
 }
 
+.navbar-nav .nav-link.active {
+    color: #23d18b;
+    border-bottom: 2px solid #23d18b;
+    font-weight: 700;
+}
+
 /* Dark theme styles */
 [data-theme="dark-theme"] body {
     background: #0d1117;
@@ -322,6 +328,10 @@ body {
 }
 [data-theme="dark-theme"] .tech-badge img[alt="GitHub"] {
     filter: brightness(0) invert(1);
+}
+
+section[id] {
+    scroll-margin-top: 20px;
 }
 
 /* Animates */
