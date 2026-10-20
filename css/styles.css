@@ -7,7 +7,7 @@ html {
     scroll-behavior: smooth;
 }
 body {
-    background: #f4f6f4;
+    background: #ffffff;
     height: 100vh;
     width: 100vw;
     overflow-x: hidden;
@@ -15,7 +15,7 @@ body {
 
 /* Navbar styles */
 .navbar {
-    background-color: #ffffff;
+    background-color: #f4f6f4;
     border-bottom: 1px solid #23d18b;
     box-shadow: 0 0 5px #23d18b;
 }
@@ -76,7 +76,6 @@ body {
 }
 
 .sidebar {
-    border-right: 1px solid #23d18b;
     height: 100vh;
     top: 0;
     position: sticky;
@@ -162,7 +161,7 @@ body {
 
 /* Tech stack section badges */
 .tech-badge {
-    background: #f4f6f4;
+    background: #ffffff;
     border: 1px solid #23d18b;
     font-family: 'JetBrains Mono', sans-serif;
     border-radius: 5px;
@@ -177,12 +176,14 @@ body {
     box-shadow: 0 0 10px var(--badge-color);
     border: 1px solid var(--badge-color);
 }
-
+.github:hover {
+    border: 1px solid #181616;
+    box-shadow: 0 0 10px #181616;
+}
 .tech-cat {
     position: relative;
     margin-top: 2rem;
 }
-
 .tech-cat::before {
     content: "";
     position: absolute;
@@ -193,7 +194,6 @@ body {
     border-top: 2px solid #23d18b;
     border-left: 2px solid #23d18b;
 }
-
 .tech-cat::after {
     content: "";
     position: absolute;
@@ -206,18 +206,42 @@ body {
 }
 
 .card {
-    background: #f4f6f4;
+    background: #ffffff;
     border: 1px solid #23d18b;
     border-radius: 5px;
     padding: 1.5rem 2rem;
     margin-bottom: 1.5rem;
     transition: transform 0.2s ease, box-shadow 0.2s ease, border 0.2s ease;
 }
-
 .card:hover {
     transform: scale(1.01);
     box-shadow: 0 0 10px #23d18b;
     border: 1px solid #23d18b;
+}
+
+/* Footer styles */
+.footer-name {
+    font-family: 'JetBrains Mono', sans-serif;
+    font-size: clamp(0.85rem, 1.5vw, 1rem);
+    color: #1a2e22;
+    font-weight: 500;
+}
+.footer-tech {
+    font-family: 'JetBrains Mono', sans-serif;
+    font-size: clamp(0.75rem, 1.2vw, 0.85rem);
+    color: #1a2e22;
+}
+.footer-links {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+}
+.footer-links a {
+    transition: transform 0.2s ease;
+    text-decoration: none;
+}
+.footer-links a:hover {
+    transform: scale(1.2);
 }
 
 /* Dark theme styles */
@@ -275,8 +299,29 @@ body {
     border: 1px solid var(--badge-color);
 }
 
+[data-theme="dark-theme"] .github:hover {
+    border: 1px solid #ffffff;
+    box-shadow: 0 0 10px #ffffff;
+}
+
 [data-theme="dark-theme"] .card {
     background: #0d1117;
+}
+
+[data-theme="dark-theme"] .footer-name {
+    color: #e6edf3;
+}
+
+[data-theme="dark-theme"] .footer-tech {
+    color: #e6edf3;
+}
+
+/* GitHub ikoni valkoiseksi tummalla teemalla */
+[data-theme="dark-theme"] .footer-links img[alt="GitHub"] {
+    filter: brightness(0) invert(1);
+}
+[data-theme="dark-theme"] .tech-badge img[alt="GitHub"] {
+    filter: brightness(0) invert(1);
 }
 
 /* Animates */
