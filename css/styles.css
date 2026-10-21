@@ -250,6 +250,29 @@ body {
     font-weight: 700;
 }
 
+/* Project filter styles */
+.project-filter {
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid #23d18b;
+    color: #1a2e22;
+    cursor: pointer;
+    font-family: 'JetBrains Mono', sans-serif;
+    transition: color 0.2s ease;
+    margin-bottom: 0.5rem;
+    padding: 0.2rem 0.8rem;
+}
+.project-filter:hover {
+    color: #23d18b;
+}
+.project-filter.active {
+    border: 1px solid #23d18b;
+    border-bottom: 1px solid transparent;
+    color: #23d18b;
+}
+
+
+
 /* Dark theme styles */
 [data-theme="dark-theme"] body {
     background: #0d1117;

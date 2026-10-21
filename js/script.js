@@ -48,3 +48,15 @@ function typeWriter() {
 }
 
 document.addEventListener('DOMContentLoaded', typeWriter);
+
+const projectFilterButtons = document.querySelectorAll('.project-filter');
+
+projectFilterButtons.forEach(button => {
+    button.addEventListener('click', () => {
+        projectFilterButtons.forEach(projectFilterButtons => {
+            projectFilterButtons.classList.remove('active');
+        });
+
+        button.classList.add('active');
+    });
+});
